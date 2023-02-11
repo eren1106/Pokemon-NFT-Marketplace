@@ -1,0 +1,16 @@
+.sidebar{
+    height: 100vh;
+    width: 300px;
+    background-color: var(--sidebar-dark);
+    padding: 20px;
+
+    .bigLogo{
+        width: 100%;
+    }
+
+    .navItems{
+        .navItem{
+            display: flex;
+        }
+    }
+}
