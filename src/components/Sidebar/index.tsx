@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import styles from './Sidebar.module.scss';
 import HomeIcon from '@mui/icons-material/Home';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
@@ -38,10 +38,14 @@ export default function Sidebar (props: ISidebarProps) {
       name: "Profile",
       icon: <PersonIcon />
     },
-  ]
+  ];
+
+  // TODO: use useSelector from redux to replace this
+  const [selectedTabName, setSelectedTabName] = useState<string>(menuItems[0].name);
+
   return (
     <div className={styles.sidebar}>
-      <MenuIcon />
+      <MenuIcon className={styles.burgerMenu} />
       <img
         className={styles.bigLogo}
         src="https://raw.githubusercontent.com/PatrickAlphaC/pokemon-nft/main/img/logo.png"
@@ -51,12 +55,15 @@ export default function Sidebar (props: ISidebarProps) {
         {
           menuItems.map((item) => 
             <NavLink
-              className={styles.navItem}
+              className={`${styles.navItem} ${selectedTabName === item.name && styles.selectedItem}`}
               key={item.name}
               to={item.path}
+              onClick={() => {
+                setSelectedTabName(item.name);
+              }}
             >
-              <div>{item.icon}</div>
-              <p>{item.name}</p>
+              <div className={styles.icon}>{item.icon}</div>
+              <p className={styles.navText}>{item.name}</p>
             </NavLink>
           )
         }

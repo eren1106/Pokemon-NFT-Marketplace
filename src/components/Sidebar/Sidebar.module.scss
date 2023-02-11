@@ -1,16 +1,57 @@
-.sidebar{
+.sidebar {
     height: 100vh;
     width: 300px;
     background-color: var(--sidebar-dark);
     padding: 20px;
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
 
-    .bigLogo{
+    .burgerMenu {
+        cursor: pointer;
+    }
+
+    .bigLogo {
         width: 100%;
     }
 
-    .navItems{
-        .navItem{
+    .navItems {
+        width: 100%;
+        gap: 5px;
+        display: flex;
+        flex-direction: column;
+
+        .navItem {
             display: flex;
+            text-decoration: none;
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            gap: 10px;
+
+            &:hover {
+                background-color: var(--grey-card);
+                cursor: pointer;
+
+                .icon,
+                .navText {
+                    color: var(--hover-text-color);
+                    transition: all 0.3s ease-in-out;
+                }
+            }
+
+            .navText {
+                font-weight: bold;
+            }
+        }
+
+        .navItem.selectedItem {
+            background-color: var(--grey-card);
+
+            .icon,
+            .navText {
+                color: var(--hover-text-color);
+            }
         }
     }
 }
