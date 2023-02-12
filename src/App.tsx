@@ -13,7 +13,7 @@ function App() {
   return (
     <div className={styles.App}>
       <Sidebar />
-      <div>
+      <div className={styles.right}>
         <Topbar />
         <Routes>
           <Route path="/" element={<Home />} />
