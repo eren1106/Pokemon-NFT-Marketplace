@@ -1,7 +1,47 @@
-.App{
+.App {
     display: flex;
 
-    .right{
+    .right {
         width: 100%;
+        min-height: 100vh;
+        position: relative;
+
+        .topSidebar {
+            display: none;
+            background-color: var(--sidebar-dark);
+            height: 60px;
+            padding: 10px;
+            align-items: center;
+
+            .burgerMenu{
+                flex: 0 0 auto;
+                display: none;
+            }
+            .burgerMenu.show{
+                display: block;
+            }
+
+            .bigLogo {
+                height: 100%;
+                margin: auto;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .App {
+        .right {
+            .topSidebar {
+                display: flex;
+            }
+        }
+
+        .blackOverlay {
+            background-color: rgba(0, 0, 0, 0.5);
+            position: absolute;
+            height: 100%;
+            width: 100%;
+        }
     }
 }

@@ -2,12 +2,13 @@
     height: 100vh;
     width: 300px;
     background-color: var(--sidebar-dark);
-    padding: 20px;
+    padding: 20px 15px;
     gap: 20px;
     display: flex;
     flex-direction: column;
     transition: all 0.3s ease-in-out;
-
+    z-index: 999;
+    
     .burgerMenu {
         cursor: pointer;
         width: fit-content;   
@@ -28,6 +29,11 @@
         .bigLogo,
         .smallLogo {
             width: 100%;
+        }
+
+        .smallLogo{
+            max-height: 80px;
+            max-width: 80px;
         }
     }
 
@@ -77,4 +83,19 @@
 
 .sidebar.closed {
     width: 80px;
+
+    .navItems{
+        .navItem{
+            justify-content: center;
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .sidebar{
+        position: absolute;
+    }
+    .sidebar.closed{
+        left: -80px;
+    }
 }

@@ -8,9 +8,11 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { NavLink } from 'react-router-dom';
 
 export interface ISidebarProps {
+  onToggle: () => void;
+  isClosed: boolean;
 }
 
-export default function Sidebar(props: ISidebarProps) {
+const Sidebar: React.FC<ISidebarProps> = ({ onToggle, isClosed }) => {
   interface MenuItem {
     path: string;
     name: string;
@@ -43,25 +45,21 @@ export default function Sidebar(props: ISidebarProps) {
   // TODO: use useSelector from redux to replace this
   const [selectedTabName, setSelectedTabName] = useState<string>(menuItems[0].name);
 
-  const [isClosed, setIsClosed] = useState<boolean>(false);
-
   return (
     <div className={`${styles.sidebar} ${isClosed && styles.closed}`}>
       <div
         className={`${styles.burgerMenu} ${isClosed && styles.alignCenter}`}
-        onClick={() => {
-          setIsClosed(!isClosed);
-        }}
+        onClick={onToggle}
       >
         <MenuIcon />
       </div>
       <div className={styles.logoDiv}>
-        {isClosed ? 
+        {isClosed ?
           <img
-          className={styles.smallLogo}
+            className={styles.smallLogo}
             src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Pok%C3%A9_Ball_icon.svg/800px-Pok%C3%A9_Ball_icon.svg.png"
             alt="pokeball logo"
-          /> : 
+          /> :
           <img
             className={styles.bigLogo}
             src="https://raw.githubusercontent.com/PatrickAlphaC/pokemon-nft/main/img/logo.png"
@@ -89,3 +87,5 @@ export default function Sidebar(props: ISidebarProps) {
     </div>
   );
 }
+
+export default Sidebar;
