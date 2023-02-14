@@ -6,6 +6,8 @@ import CollectionsBookmarkIcon from '@mui/icons-material/CollectionsBookmark';
 import PersonIcon from '@mui/icons-material/Person';
 import MenuIcon from '@mui/icons-material/Menu';
 import { NavLink } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { setTitle } from '../../features/selectedTitleSlice';
 
 export interface ISidebarProps {
   onToggle: () => void;
@@ -42,8 +44,8 @@ const Sidebar: React.FC<ISidebarProps> = ({ onToggle, isClosed }) => {
     },
   ];
 
-  // TODO: use useSelector from redux to replace this
-  const [selectedTabName, setSelectedTabName] = useState<string>(menuItems[0].name);
+  const selectedTabName = useAppSelector(state => state.selectedTitle.title);
+  const dispatch = useAppDispatch();
 
   return (
     <div className={`${styles.sidebar} ${isClosed && styles.closed}`}>
@@ -75,7 +77,7 @@ const Sidebar: React.FC<ISidebarProps> = ({ onToggle, isClosed }) => {
               key={item.name}
               to={item.path}
               onClick={() => {
-                setSelectedTabName(item.name);
+                dispatch(setTitle(item.name))
               }}
             >
               {item.icon}
