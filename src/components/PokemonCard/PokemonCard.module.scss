@@ -1,0 +1,58 @@
+.pokemonCard {
+    .upper{
+        display: flex;
+        flex-direction: column;
+
+        .top {
+            display: flex;
+
+            .topLeft {
+                display: flex;
+                flex-direction: column;
+
+                .typeDiv{
+                    display: flex;
+
+                    .typeIcon {
+                        height: 30px;
+                        width: 30px;
+                    }
+                }
+            }
+
+            .diamond {
+                .index {
+                    
+                }
+            }
+        }
+
+        .pokemonImage {
+            height: 200px;
+            width: 200px;
+        }
+    }
+
+    .lower {
+        display: flex;
+
+        .lowerLeft {
+            display: flex;
+            flex-direction: column;
+
+            .price {
+
+            }
+
+            .owner {
+
+            }
+        }
+
+        .buyBtn {
+            
+        }
+    }
+
+
+}
