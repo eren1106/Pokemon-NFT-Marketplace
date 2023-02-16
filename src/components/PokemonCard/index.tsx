@@ -23,7 +23,7 @@ const PokemonCard: React.FC<IPokemonCardProps> = ({
 }) => {
   return (
     <div className={styles.pokemonCard}>
-      <div className={styles.upper} style={{ backgroundColor: TYPES[types[0].toLowerCase()].color }}>
+      <div className={styles.upper} style={{ background: `linear-gradient(to bottom, ${TYPES[types[0].toLowerCase()].color}30 0%, ${TYPES[types[0].toLowerCase()].color} 100%)` }}>
         <div className={styles.top}>
           <div className={styles.topLeft}>
             <h2 className={styles.name}>{name}</h2>
@@ -44,11 +44,11 @@ const PokemonCard: React.FC<IPokemonCardProps> = ({
           </div>
         </div>
         <img className={styles.pokemonImage} src={imgUrl} alt="pokemon" />
-        <p>Lv. {level}</p>
+        <p className={styles.level}>Lv. {level}</p>
       </div>
       <div className={styles.lower}>
         <p className={styles.price}>{`$${price}`}</p>
-        <p className={styles.owner}>None</p>
+        <p className={styles.owner}>@None</p>
       </div>
     </div>
   );
