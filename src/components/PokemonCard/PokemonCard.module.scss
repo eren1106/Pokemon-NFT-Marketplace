@@ -1,7 +1,12 @@
 .pokemonCard {
-    .upper{
+    background-color: var(--grey-card);
+    border-radius: 20px;
+
+    .upper {
         display: flex;
         flex-direction: column;
+        border-radius: 20px 20px 0 0;
+        padding: 10px 15px;
 
         .top {
             display: flex;
@@ -10,7 +15,7 @@
                 display: flex;
                 flex-direction: column;
 
-                .typeDiv{
+                .typeDiv {
                     display: flex;
 
                     .typeIcon {
@@ -21,9 +26,7 @@
             }
 
             .diamond {
-                .index {
-                    
-                }
+                .index {}
             }
         }
 
@@ -35,24 +38,11 @@
 
     .lower {
         display: flex;
+        flex-direction: column;
 
-        .lowerLeft {
-            display: flex;
-            flex-direction: column;
 
-            .price {
+        .price {}
 
-            }
-
-            .owner {
-
-            }
-        }
-
-        .buyBtn {
-            
-        }
+        .owner {}
     }
-
-
 }

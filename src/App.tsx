@@ -20,7 +20,7 @@ function App() {
   return (
     <div className={styles.App}>
       <Sidebar onToggle={handleToggle} isClosed={isClosed} />
-      <div className={styles.right}>
+      <div className={`${styles.right} ${!isClosed && styles.shrink}`}>
         <div className={`${!isClosed && styles.blackOverlay}`} />
         <div className={styles.topSidebar}>
           <div

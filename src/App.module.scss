@@ -5,6 +5,8 @@
         width: 100%;
         min-height: 100vh;
         position: relative;
+        margin-left: var(--sidebar-close-width);
+        transition: all 0.3s ease-in-out;
 
         .topSidebar {
             display: none;
@@ -27,14 +29,23 @@
             }
         }
     }
+
+    .right.shrink{
+        margin-left: var(--sidebar-open-width);
+    }
 }
 
 @media screen and (max-width: 768px) {
     .App {
         .right {
+            margin-left: 0;
+
             .topSidebar {
                 display: flex;
             }
+        }
+        .right.shrink{
+            margin-left: 0;
         }
 
         .blackOverlay {

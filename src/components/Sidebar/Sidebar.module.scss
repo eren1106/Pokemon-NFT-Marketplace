@@ -1,6 +1,6 @@
 .sidebar {
     height: 100vh;
-    width: 300px;
+    width: var(--sidebar-open-width);
     background-color: var(--sidebar-dark);
     padding: 20px 15px;
     gap: 20px;
@@ -8,11 +8,12 @@
     flex-direction: column;
     transition: all 0.3s ease-in-out;
     z-index: 999;
-    
+    position: fixed;
+
     .burgerMenu {
         cursor: pointer;
-        width: fit-content;   
-        align-self: flex-end;  
+        width: fit-content;
+        align-self: flex-end;
     }
 
     .burgerMenu.alignCenter {
@@ -31,7 +32,7 @@
             width: 100%;
         }
 
-        .smallLogo{
+        .smallLogo {
             max-height: 80px;
             max-width: 80px;
         }
@@ -82,20 +83,20 @@
 }
 
 .sidebar.closed {
-    width: 80px;
-
-    .navItems{
-        .navItem{
+    width: var(--sidebar-close-width);
+    
+    .navItems {
+        .navItem {
             justify-content: center;
         }
     }
 }
 
 @media screen and (max-width: 768px) {
-    .sidebar{
-        position: absolute;
+    .sidebar {
+        left: 0px;
     }
-    .sidebar.closed{
-        left: -80px;
+    .sidebar.closed {
+        left: calc(0px - var(--sidebar-open-width));
     }
 }
