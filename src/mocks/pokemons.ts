@@ -10,8 +10,8 @@ export interface Pokemon {
     hp: number,
     imgUrl: string,
     price: number,
-    prevPrice: number | null,
-    ownerID: string | null,
+    prevPrice?: number,
+    ownerID?: string,
 }
 
 const pokemons: Pokemon[] = [
@@ -27,8 +27,7 @@ const pokemons: Pokemon[] = [
         hp: 10,
         imgUrl: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png',
         price: 10,
-        prevPrice: null,
-        ownerID: null,
+
     },
     {
         id: 'qwertyuiop1234567891',
@@ -43,7 +42,7 @@ const pokemons: Pokemon[] = [
         imgUrl: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/006.png',
         price: 5000,
         prevPrice: 3800,
-        ownerID: null,
+
     },
     {
         id: 'qwertyuiop1234567892',
@@ -58,7 +57,7 @@ const pokemons: Pokemon[] = [
         imgUrl: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/008.png',
         price: 500,
         prevPrice: 300,
-        ownerID: null,
+
     },
     {
         id: 'qwertyuiop1234567893',
@@ -72,8 +71,7 @@ const pokemons: Pokemon[] = [
         hp: 10,
         imgUrl: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png',
         price: 10,
-        prevPrice: null,
-        ownerID: null,
+
     },
     {
         id: 'qwertyuiop1234567894',
@@ -88,7 +86,7 @@ const pokemons: Pokemon[] = [
         imgUrl: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/006.png',
         price: 5000,
         prevPrice: 3800,
-        ownerID: null,
+
     },
     {
         id: 'qwertyuiop1234567895',
@@ -103,7 +101,7 @@ const pokemons: Pokemon[] = [
         imgUrl: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/008.png',
         price: 500,
         prevPrice: 300,
-        ownerID: null,
+
     },
     {
         id: 'qwertyuiop1234567896',
@@ -117,8 +115,7 @@ const pokemons: Pokemon[] = [
         hp: 10,
         imgUrl: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png',
         price: 10,
-        prevPrice: null,
-        ownerID: null,
+
     },
     {
         id: 'qwertyuiop1234567897',
@@ -133,7 +130,7 @@ const pokemons: Pokemon[] = [
         imgUrl: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/006.png',
         price: 5000,
         prevPrice: 3800,
-        ownerID: null,
+
     },
     {
         id: 'qwertyuiop1234567898',
@@ -148,7 +145,7 @@ const pokemons: Pokemon[] = [
         imgUrl: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/008.png',
         price: 500,
         prevPrice: 300,
-        ownerID: null,
+
     },
     {
         id: 'qwertyuiop1234567899',
@@ -162,8 +159,7 @@ const pokemons: Pokemon[] = [
         hp: 10,
         imgUrl: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png',
         price: 10,
-        prevPrice: null,
-        ownerID: null,
+
     },
     {
         id: 'qwertyuiop12345678910',
@@ -178,7 +174,7 @@ const pokemons: Pokemon[] = [
         imgUrl: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/006.png',
         price: 5000,
         prevPrice: 3800,
-        ownerID: null,
+
     },
     {
         id: 'qwertyuiop12345678911',
@@ -193,7 +189,7 @@ const pokemons: Pokemon[] = [
         imgUrl: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/008.png',
         price: 500,
         prevPrice: 300,
-        ownerID: null,
+
     },
 ]
 

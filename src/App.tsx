@@ -24,10 +24,8 @@ function App() {
         <div className={`${!isClosed && styles.blackOverlay}`} />
         <div className={styles.topSidebar}>
           <div
-            className={`${styles.burgerMenu} ${isClosed && styles.show}`}
-            onClick={() => {
-              setIsClosed(!isClosed);
-            }}
+            className={styles.burgerMenu}
+            onClick={handleToggle}
           >
             <MenuIcon />
           </div>
@@ -42,9 +40,10 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
           <Route path="/shop" element={<Shop />} />
+          <Route path="/shop/:id" element={<Detail />} />
           <Route path="/collections" element={<Collection />} />
+          <Route path="/collections/:id" element={<Detail />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/:pokemonID" element={<Detail />} />
         </Routes>
       </div>
     </div>

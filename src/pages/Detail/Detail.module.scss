@@ -1,0 +1,147 @@
+.wrapper {
+    display: flex;
+    padding: 35px 50px;
+    gap: 30px;
+
+    .left {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+
+        .name {}
+
+        .pokemonImg {
+            width: 80%;
+            margin: 0 auto;
+            animation: breath-animation 3s ease-in-out infinite;
+        }
+    }
+
+    .right {
+        flex: 1;
+        background-color: var(--grey-card);
+        border-radius: 15px;
+        padding: 25px 30px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        .row {
+            display: flex;
+
+            .info {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+                font-size: 16px;
+
+                .label {
+                    font-weight: 600;
+                    color: var(--grey-text);
+                }
+
+                .text {
+                    font-weight: bold;
+                }
+
+                .types {
+                    display: flex;
+                    gap: 20px;
+
+                    .typeDiv {
+                        display: flex;
+                        align-items: center;
+                        gap: 6px;
+
+                        .typeImg {
+                            width: 30px;
+                            height: 30px;
+                        }
+
+                        .typeText {
+                            font-weight: bold;
+                        }
+                    }
+                }
+            }
+        }
+
+        .divider {
+            border-top: 0.1px solid var(--divider);
+            margin: 5px 0;
+        }
+
+        .btmSection {
+            margin-top: 30px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+
+            .price {
+                font-weight: bolder;
+                font-size: 30px;
+            }
+
+            .buyBtn {
+                background-color: var(--hover-text-color);
+                padding: 10px;
+                font-weight: bold;
+                font-size: 16px;
+                border-radius: 10px;
+                cursor: pointer;
+                transition: all 0.3s ease-in-out;
+
+                &:hover{
+                    transform: scale(1.05);
+                }
+            }
+        }
+    }
+
+}
+
+@keyframes breath-animation {
+    0% {
+        transform: scaleY(1) scaleX(1) rotate(0deg);
+    }
+
+    25% {
+        transform: scaleY(1.03) scaleX(1) rotate(-5deg);
+    }
+
+    50% {
+        transform: scaleY(1) scaleX(1) rotate(0deg);
+    }
+
+    75% {
+        transform: scaleY(1) scaleX(1.03) rotate(5deg);
+    }
+
+    100% {
+        transform: scaleY(1) scaleX(1) rotate(0deg);
+    }
+}
+
+@keyframes vibrate-animation {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    25% {
+        transform: rotate(-15deg);
+    }
+
+    50% {
+        transform: rotate(0deg);
+    }
+
+    75% {
+        transform: rotate(15deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}

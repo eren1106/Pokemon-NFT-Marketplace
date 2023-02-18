@@ -6,13 +6,16 @@ import styles from './Shop.module.scss';
 export interface IShopProps {
 }
 
-export default function Shop (props: IShopProps) {
+export default function Shop(props: IShopProps) {
+
   return (
     <div className={styles.shop}>
       <div className={styles.cardsWrapper}>
         {
-          pokemons.map((pokemon) => 
+          pokemons.map((pokemon) =>
             <PokemonCard
+              key={pokemon.id}
+              id={pokemon.id}
               name={pokemon.name}
               index={pokemon.index}
               imgUrl={pokemon.imgUrl}
