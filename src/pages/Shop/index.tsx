@@ -1,4 +1,5 @@
 import * as React from 'react';
+import PageWrapper from '../../components/PageWrapper';
 import PokemonCard from '../../components/PokemonCard';
 import pokemons from '../../mocks/pokemons';
 import styles from './Shop.module.scss';
@@ -9,7 +10,10 @@ export interface IShopProps {
 export default function Shop(props: IShopProps) {
 
   return (
-    <div className={styles.shop}>
+    <PageWrapper
+      title="Shop"
+    >
+      <div className={styles.shop}>
       <div className={styles.cardsWrapper}>
         {
           pokemons.map((pokemon) =>
@@ -28,5 +32,6 @@ export default function Shop(props: IShopProps) {
         }
       </div>
     </div>
+    </PageWrapper>
   );
 }

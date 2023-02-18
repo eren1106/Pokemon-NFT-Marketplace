@@ -1,12 +1,15 @@
 import * as React from 'react';
+import PageWrapper from '../../components/PageWrapper';
 
 export interface IHomeProps {
 }
 
-export default function Home (props: IHomeProps) {
+export default function Home(props: IHomeProps) {
   return (
-    <div>
-      Home
-    </div>
+    <PageWrapper title="Home">
+      <div>
+        Home
+      </div>
+    </PageWrapper>
   );
 }

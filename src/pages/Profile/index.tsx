@@ -1,12 +1,15 @@
 import * as React from 'react';
+import PageWrapper from '../../components/PageWrapper';
 
 export interface IProfileProps {
 }
 
-export default function Profile (props: IProfileProps) {
+export default function Profile(props: IProfileProps) {
   return (
-    <div>
-      Profile
-    </div>
+    <PageWrapper title="Profile">
+      <div>
+        Profile
+      </div>
+    </PageWrapper>
   );
 }
