@@ -4,7 +4,7 @@ import TYPES from '../../constant/types';
 import styles from './PokemonCard.module.scss';
 
 interface IPokemonCardProps {
-  id: string
+  id?: string
   name: string;
   index: number;
   imgUrl: string;
@@ -26,7 +26,7 @@ const PokemonCard: React.FC<IPokemonCardProps> = ({
 }) => {
   const navigate = useNavigate();
   const handleNavigate = () => {
-    navigate(id);
+    navigate(id!);
   }
   return (
     <div className={styles.pokemonCard}

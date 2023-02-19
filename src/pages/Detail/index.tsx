@@ -83,7 +83,7 @@ export default function Detail(props: IDetailProps) {
                 text={pokemon.atk}
               />,
               <Info
-                label="Defend"
+                label="Defense"
                 text={pokemon.def}
               />
             ]}
@@ -94,6 +94,10 @@ export default function Detail(props: IDetailProps) {
                 label="HP"
                 text={pokemon.hp}
               />,
+              <Info
+                label="Speed"
+                text={pokemon.speed}
+              />
             ]}
           />
           <div className={styles.divider} />
