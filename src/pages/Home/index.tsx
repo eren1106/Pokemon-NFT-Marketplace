@@ -1,13 +1,13 @@
 import axios from 'axios';
 import * as React from 'react';
 import PageWrapper from '../../components/PageWrapper';
-import { Pokemon } from '../../mocks/pokemons';
+import { Pokemon } from '../../constant/pokemonInterface';
 
 export interface IHomeProps {
 }
 
 export default function Home(props: IHomeProps) {
-  const pokemonQuantity = 10;
+  const pokemonQuantity = 25;
   const capitalizeFirstLetter = (str: string): string => { // Capitalize pokemon name (only first letter)
     return str.charAt(0).toUpperCase() + str.slice(1);
   }
@@ -20,9 +20,6 @@ export default function Home(props: IHomeProps) {
     await Promise.all(
       pokemonList.map(async (pokemon: any) => {
         const { data } = await axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemon.name}`);
-        // pokemon.types = data.types;
-        // pokemon.stats = data.stats;
-        // pokemon.sprites = data.sprites;
         const newPokemon: Pokemon = {
           name: capitalizeFirstLetter(data.name),
           no: data.id,
@@ -33,7 +30,7 @@ export default function Home(props: IHomeProps) {
           def: data.stats.find((stat: { stat: { name: string } }) => stat.stat.name === 'defense').base_stat,
           hp: data.stats.find((stat: { stat: { name: string } }) => stat.stat.name === 'hp').base_stat,
           speed: data.stats.find((stat: { stat: { name: string } }) => stat.stat.name === 'speed').base_stat,
-          imgUrl: data.sprites.other.dream_world.front_default,
+          imgUrl: data.sprites.other["official-artwork"].front_default,
           price: 10,
         }
 
@@ -52,6 +49,7 @@ export default function Home(props: IHomeProps) {
         Home
         <button
           onClick={handleGenerate}
+          style={{backgroundColor: 'var(--hover-text-color)'}}
         >
           Generate Pokemon NFTs
         </button>

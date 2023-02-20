@@ -1,8 +1,9 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import PageWrapper from '../../components/PageWrapper';
+import { Pokemon } from '../../constant/pokemonInterface';
 import TYPES from '../../constant/types';
-import pokemons, { Pokemon } from '../../mocks/pokemons';
 import styles from './Detail.module.scss';
 
 export interface IDetailProps {
@@ -15,11 +16,14 @@ export default function Detail(props: IDetailProps) {
   const [ownerName, setOwnerName] = useState<string>("@Nobody");
 
   useEffect(() => {
-    // TODO: call api to fetch data
-    const data = pokemons.find((p) => p.id === id);
-    if (data) {
-      setPokemon(data);
+    const fetchPokemonData = async() => {
+      const { data } = await axios.get(`${process.env.REACT_APP_SERVER_URL}/pokemons/${id}`);
+      console.log(data);
+      if (data) {
+        setPokemon(data);
+      }
     }
+    fetchPokemonData();
   }, [id]);
 
   if (!pokemon) return <div>Fetching data</div>

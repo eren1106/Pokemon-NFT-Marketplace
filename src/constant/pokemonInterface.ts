@@ -1,0 +1,16 @@
+export interface Pokemon {
+    _id?: string,
+    name: string,
+    no: number,
+    index: number,
+    types: Array<string>,
+    level: number,
+    atk: number,
+    def: number,
+    hp: number,
+    speed: number,
+    imgUrl: string,
+    price: number,
+    prevPrice?: number,
+    ownerID?: string,
+}

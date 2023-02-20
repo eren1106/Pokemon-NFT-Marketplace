@@ -1,23 +1,6 @@
-export interface Pokemon {
-    id?: string,
-    name: string,
-    no: string,
-    index: number,
-    types: Array<string>,
-    level: number,
-    atk: number,
-    def: number,
-    hp: number,
-    speed: number,
-    imgUrl: string,
-    price: number,
-    prevPrice?: number,
-    ownerID?: string,
-}
-
-const pokemons: Pokemon[] = [
+const pokemons = [
     {
-        id: 'qwertyuiop1234567890',
+        _id: 'qwertyuiop1234567890',
         name: 'Bulbasaur',
         no: '001',
         index: 1,
@@ -32,7 +15,7 @@ const pokemons: Pokemon[] = [
 
     },
     {
-        id: 'qwertyuiop1234567891',
+        _id: 'qwertyuiop1234567891',
         name: 'Charizard',
         no: '006',
         index: 1,
@@ -48,7 +31,7 @@ const pokemons: Pokemon[] = [
 
     },
     {
-        id: 'qwertyuiop1234567892',
+        _id: 'qwertyuiop1234567892',
         name: 'Wartortle',
         no: '008',
         index: 1,
@@ -64,7 +47,7 @@ const pokemons: Pokemon[] = [
 
     },
     {
-        id: 'qwertyuiop1234567893',
+        _id: 'qwertyuiop1234567893',
         name: 'Bulbasaur',
         no: '001',
         index: 2,
@@ -79,7 +62,7 @@ const pokemons: Pokemon[] = [
 
     },
     {
-        id: 'qwertyuiop1234567894',
+        _id: 'qwertyuiop1234567894',
         name: 'Charizard',
         no: '006',
         index: 2,
@@ -95,7 +78,7 @@ const pokemons: Pokemon[] = [
 
     },
     {
-        id: 'qwertyuiop1234567895',
+        _id: 'qwertyuiop1234567895',
         name: 'Wartortle',
         no: '008',
         index: 2,
@@ -111,7 +94,7 @@ const pokemons: Pokemon[] = [
 
     },
     {
-        id: 'qwertyuiop1234567896',
+        _id: 'qwertyuiop1234567896',
         name: 'Bulbasaur',
         no: '001',
         index: 1,
@@ -126,7 +109,7 @@ const pokemons: Pokemon[] = [
 
     },
     {
-        id: 'qwertyuiop1234567897',
+        _id: 'qwertyuiop1234567897',
         name: 'Charizard',
         no: '006',
         index: 1,
@@ -142,7 +125,7 @@ const pokemons: Pokemon[] = [
 
     },
     {
-        id: 'qwertyuiop1234567898',
+        _id: 'qwertyuiop1234567898',
         name: 'Wartortle',
         no: '008',
         index: 1,
@@ -158,7 +141,7 @@ const pokemons: Pokemon[] = [
 
     },
     {
-        id: 'qwertyuiop1234567899',
+        _id: 'qwertyuiop1234567899',
         name: 'Bulbasaur',
         no: '001',
         index: 2,
@@ -173,7 +156,7 @@ const pokemons: Pokemon[] = [
 
     },
     {
-        id: 'qwertyuiop12345678910',
+        _id: 'qwertyuiop12345678910',
         name: 'Charizard',
         no: '006',
         index: 2,
@@ -189,7 +172,7 @@ const pokemons: Pokemon[] = [
 
     },
     {
-        id: 'qwertyuiop12345678911',
+        _id: 'qwertyuiop12345678911',
         name: 'Wartortle',
         no: '008',
         index: 2,

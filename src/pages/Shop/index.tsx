@@ -1,13 +1,26 @@
-import * as React from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import PageWrapper from '../../components/PageWrapper';
 import PokemonCard from '../../components/PokemonCard';
-import pokemons from '../../mocks/pokemons';
+import { Pokemon } from '../../constant/pokemonInterface';
 import styles from './Shop.module.scss';
 
 export interface IShopProps {
 }
 
 export default function Shop(props: IShopProps) {
+  const [allPokemons, setAllPokemons] = useState<Pokemon[]>([]);
+
+  const fetchAllPokemons = async () => {
+    const { data } = await axios.get(`${process.env.REACT_APP_SERVER_URL}/pokemons`);
+    data.sort((a: Pokemon, b: Pokemon) => a.no - b.no)
+    setAllPokemons(data);
+    console.log(data);
+  }
+
+  useEffect(() => {
+    fetchAllPokemons();
+  }, []);
 
   return (
     <PageWrapper
@@ -16,10 +29,10 @@ export default function Shop(props: IShopProps) {
       <div className={styles.shop}>
       <div className={styles.cardsWrapper}>
         {
-          pokemons.map((pokemon) =>
+          allPokemons.map((pokemon) =>
             <PokemonCard
-              key={pokemon.id}
-              id={pokemon.id}
+              key={pokemon._id}
+              id={pokemon._id}
               name={pokemon.name}
               index={pokemon.index}
               imgUrl={pokemon.imgUrl}
