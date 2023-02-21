@@ -49,7 +49,7 @@ export default function Home(props: IHomeProps) {
         Home
         <button
           onClick={handleGenerate}
-          style={{backgroundColor: 'var(--hover-text-color)'}}
+          style={{backgroundColor: 'var(--orange)'}}
         >
           Generate Pokemon NFTs
         </button>

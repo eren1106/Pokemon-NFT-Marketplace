@@ -1,4 +1,4 @@
-.App {
+.wrapper {
     display: flex;
 
     .right {
@@ -32,7 +32,7 @@
 }
 
 @media screen and (max-width: 768px) {
-    .App {
+    .wrapper {
         .right {
             margin-left: 0;
 

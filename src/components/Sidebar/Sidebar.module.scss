@@ -59,8 +59,8 @@
 
                 .icon,
                 .navText {
-                    color: var(--hover-text-color);
-                    fill: var(--hover-text-color);
+                    color: var(--orange);
+                    fill: var(--orange);
                     transition: all 0.3s ease-in-out;
                 }
             }
@@ -75,8 +75,8 @@
 
             .icon,
             .navText {
-                color: var(--hover-text-color);
-                fill: var(--hover-text-color);
+                color: var(--orange);
+                fill: var(--orange);
             }
         }
     }
