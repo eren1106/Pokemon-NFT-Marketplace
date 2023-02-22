@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useRef } from 'react';
 import styles from './Register.module.scss';
 
@@ -10,9 +11,38 @@ const Register: React.FunctionComponent<IRegisterProps> = (props) => {
     const passwordRef = useRef<HTMLInputElement>(null);
     const confirmPasswordRef = useRef<HTMLInputElement>(null);
 
-    const handleSubmit = () => {
+    const register = async () => {
+        const name = nameRef.current?.value;
+        const email = emailRef.current?.value;
+        const password = passwordRef.current?.value;
+        const confirmPassword = confirmPasswordRef.current?.value;
 
+        if(!name || !email || !password || !confirmPassword) {
+            // TODO: Show proper error message above register button
+            alert("Please complete all the fields");
+            return;
+        }
+
+        if(password !== confirmPassword) {
+            // TODO: Show proper error message above register button
+            alert("Unsimilar password!");
+            return;
+        }
+
+        await axios.post(`${process.env.REACT_APP_SERVER_URL}/auth/register`, {
+            name,
+            email,
+            password,
+        });
+
+        // TODO: Show pop up to inform register success or fail
+        // TODO: Navigate to home page if success
     }
+
+    const handleSubmit = () => {
+        register();
+    }
+
     return (
         <div className={styles.wrapper}>
             <img
