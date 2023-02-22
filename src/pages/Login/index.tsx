@@ -1,38 +1,27 @@
 import axios from 'axios';
 import React, { FormEvent, useRef } from 'react';
-import styles from './Register.module.scss';
+import styles from '../Register/Register.module.scss';
 
-interface IRegisterProps {
+interface ILoginProps {
 }
 
-const Register: React.FunctionComponent<IRegisterProps> = (props) => {
-    const nameRef = useRef<HTMLInputElement>(null);
+const Login: React.FunctionComponent<ILoginProps> = (props) => {
     const emailRef = useRef<HTMLInputElement>(null);
     const passwordRef = useRef<HTMLInputElement>(null);
-    const confirmPasswordRef = useRef<HTMLInputElement>(null);
 
-    const register = async () => {
-        const name = nameRef.current?.value;
+    const login = async () => {
         const email = emailRef.current?.value;
         const password = passwordRef.current?.value;
-        const confirmPassword = confirmPasswordRef.current?.value;
 
-        if(!name || !email || !password || !confirmPassword) {
-            // TODO: Show proper error message above register button
+        if(!email || !password) {
+            // TODO: Show proper error message above login button
             alert("Please complete all the fields");
-            return;
-        }
-
-        if(password !== confirmPassword) {
-            // TODO: Show proper error message above register button
-            alert("Unsimilar password!");
             return;
         }
 
         try {
             // TODO: Show loading
-            const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/auth/register`, {
-                name,
+            const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/auth/login`, {
                 email,
                 password,
             });
@@ -42,13 +31,13 @@ const Register: React.FunctionComponent<IRegisterProps> = (props) => {
             console.log(err);
         }
 
-        // TODO: Show pop up to inform register success or fail
+        // TODO: Show "invalid password or email" if login fail
         // TODO: Navigate to home page if success
     }
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        register();
+        login();
     }
 
     return (
@@ -61,12 +50,6 @@ const Register: React.FunctionComponent<IRegisterProps> = (props) => {
             <form onSubmit={handleSubmit} className={styles.container}>
                 <input
                     className={styles.textfield}
-                    type="text"
-                    ref={nameRef}
-                    placeholder="Name"
-                />
-                <input
-                    className={styles.textfield}
                     type="email"
                     ref={emailRef}
                     placeholder="Email"
@@ -77,18 +60,12 @@ const Register: React.FunctionComponent<IRegisterProps> = (props) => {
                     ref={passwordRef}
                     placeholder="Password"
                 />
-                <input
-                    className={styles.textfield}
-                    type="password"
-                    ref={confirmPasswordRef}
-                    placeholder="Confirm Password"
-                />
                 <button type="submit" className={styles.btn}>
-                    Register
+                    Login
                 </button>
             </form>
         </div>
     );
 };
 
-export default Register;
+export default Login;
