@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
 import selectedTitleReducer from './features/selectedTitleSlice'
+import currentUserReducer from './features/currentUserSlice'
 
 export const store = configureStore({
   reducer: {
     selectedTitle: selectedTitleReducer,
+    currentUser: currentUserReducer,
   }
 })
 

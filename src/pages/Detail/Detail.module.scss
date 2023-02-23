@@ -97,6 +97,11 @@
                     transform: scale(1.05);
                 }
             }
+
+            .buyBtn.unavailable {
+                pointer-events: none;
+                opacity: 0.5;
+            }
         }
     }
 

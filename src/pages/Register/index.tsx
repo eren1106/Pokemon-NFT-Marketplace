@@ -43,7 +43,7 @@ const Register: React.FunctionComponent<IRegisterProps> = (props) => {
         }
 
         // TODO: Show pop up to inform register success or fail
-        // TODO: Navigate to home page if success
+        // TODO: Navigate to login page if success
     }
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {

@@ -1,11 +1,17 @@
 import axios from 'axios';
 import React, { FormEvent, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { User } from '../../constant/userInterface';
+import { setCurrentUser } from '../../features/currentUserSlice';
+import { useAppDispatch } from '../../hooks';
 import styles from '../Register/Register.module.scss';
 
 interface ILoginProps {
 }
 
 const Login: React.FunctionComponent<ILoginProps> = (props) => {
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
     const emailRef = useRef<HTMLInputElement>(null);
     const passwordRef = useRef<HTMLInputElement>(null);
 
@@ -25,10 +31,25 @@ const Login: React.FunctionComponent<ILoginProps> = (props) => {
                 email,
                 password,
             });
-            console.log(res);
+            
+            // TODO: Setup thunk and do this inside createAsyncThunk
+            if(res.status === 200) {
+                const { data } = res;
+                const currentUser: User = {
+                    _id: data._id,
+                    name: data.name,
+                    email: data.email,
+                    pokemons: data.pokemons,
+                    coins: data.coins
+                }
+                dispatch(setCurrentUser(currentUser));
+
+                navigate('/');
+            }
         }
         catch(err) {
             console.log(err);
+            alert(err);
         }
 
         // TODO: Show "invalid password or email" if login fail

@@ -13,4 +13,5 @@ export interface Pokemon {
     price: number,
     prevPrice?: number,
     ownerID?: string,
+    forSale: boolean,
 }

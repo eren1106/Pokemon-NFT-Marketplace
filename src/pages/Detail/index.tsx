@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import PageWrapper from '../../components/PageWrapper';
 import { Pokemon } from '../../constant/pokemonInterface';
@@ -12,11 +13,14 @@ export interface IDetailProps {
 export default function Detail(props: IDetailProps) {
   const { id } = useParams();
   const [pokemon, setPokemon] = useState<Pokemon | null>(null);
+
   // TODO: call api to fetch owner name
   const [ownerName, setOwnerName] = useState<string>("@Nobody");
 
+  const currentUser = useSelector((state: any) => state.currentUser.currentUser);
+
   useEffect(() => {
-    const fetchPokemonData = async() => {
+    const fetchPokemonData = async () => {
       const { data } = await axios.get(`${process.env.REACT_APP_SERVER_URL}/pokemons/${id}`);
       console.log(data);
       if (data) {
@@ -25,6 +29,21 @@ export default function Detail(props: IDetailProps) {
     }
     fetchPokemonData();
   }, [id]);
+
+  const handleBuyPokemon = async () => {
+    if(currentUser.coins < pokemon?.price!) {
+      alert("Not enough coins");
+      return;
+    }
+    const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/pokemons/buy`, {
+      pokemonId: id,
+      buyerId: currentUser._id,
+      sellerId: pokemon?.ownerID,
+      price: pokemon?.price,
+    });
+
+    console.log(res);
+  }
 
   if (!pokemon) return <div>Fetching data</div>
   return (
@@ -118,8 +137,11 @@ export default function Detail(props: IDetailProps) {
             ]}
           />
           <div className={styles.btmSection}>
-            <p className={styles.price}>{`$${pokemon.price}`}</p>
-            <button className={styles.buyBtn}>
+            <p className={styles.price}>{pokemon.forSale ? `$${pokemon.price}` : "Unavailable"}</p>
+            <button
+              onClick={handleBuyPokemon}
+              className={`${styles.buyBtn} ${!pokemon.forSale && styles.unavailable}`}
+            >
               Buy Now
             </button>
           </div>

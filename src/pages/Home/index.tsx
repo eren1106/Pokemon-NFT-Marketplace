@@ -32,6 +32,7 @@ export default function Home(props: IHomeProps) {
           speed: data.stats.find((stat: { stat: { name: string } }) => stat.stat.name === 'speed').base_stat,
           imgUrl: data.sprites.other["official-artwork"].front_default,
           price: 10,
+          forSale: true,
         }
 
         const res = await axios.post("http://localhost:3001/api/pokemons/create", newPokemon);
