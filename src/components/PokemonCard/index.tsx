@@ -49,9 +49,9 @@ const PokemonCard: React.FC<IPokemonCardProps> = ({
               }
             </div>
           </div>
-          <div className={styles.diamond}>
+          {/* <div className={styles.diamond}>
             <p className={styles.index}>{index}</p>
-          </div>
+          </div> */}
         </div>
         <img className={styles.pokemonImage} src={imgUrl} alt="pokemon" />
         <p className={styles.level}>Lv. {level}</p>

@@ -80,6 +80,31 @@
             }
         }
     }
+
+    .logBtn {
+        background-color: var(--orange);
+        border-radius: 15px;
+        padding: 10px;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        margin-top: auto;
+
+        .btnContent {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            
+            .btnText {
+                font-size: 15px;
+                font-weight: 600;
+            }
+        }
+
+        &:hover {
+            background-color: var(--hover-orange);
+        }
+    }
 }
 
 .sidebar.closed {

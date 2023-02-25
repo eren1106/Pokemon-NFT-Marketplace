@@ -31,7 +31,7 @@ export default function Detail(props: IDetailProps) {
   }, [id]);
 
   const handleBuyPokemon = async () => {
-    if(currentUser.coins < pokemon?.price!) {
+    if (currentUser.coins < pokemon?.price!) {
       alert("Not enough coins");
       return;
     }
@@ -45,10 +45,15 @@ export default function Detail(props: IDetailProps) {
     console.log(res);
   }
 
+  const convertPokedexNum = (num: number): string => {
+    const paddedNum = num.toString().padStart(3, '0');
+    return `#${paddedNum}`;
+  }
+  // TODO: using redux thunk to show loading
   if (!pokemon) return <div>Fetching data</div>
   return (
     <PageWrapper
-      title={`${pokemon.name} #${pokemon.index}`}
+      title={`${pokemon.name} ${convertPokedexNum(pokemon.no)}`}
     >
       <div className={styles.wrapper}>
         <div className={styles.left}>
@@ -90,12 +95,12 @@ export default function Detail(props: IDetailProps) {
             children={[
               <Info
                 label="Pokedex Number"
-                text={pokemon.no}
+                text={convertPokedexNum(pokemon.no)}
               />,
-              <Info
-                label="Serial Number"
-                text={pokemon.index}
-              />
+              // <Info
+              //   label="Serial Number"
+              //   text={pokemon.index}
+              // />
             ]}
           />
           <div className={styles.divider} />
@@ -132,7 +137,7 @@ export default function Detail(props: IDetailProps) {
               />,
               <Info
                 label="Previous Price"
-                text={pokemon.prevPrice}
+                text={pokemon.prevPrice ?? "-"}
               />
             ]}
           />
