@@ -1,3 +1,9 @@
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 .wrapper {
     display: flex;
     padding: 35px 50px;
@@ -79,6 +85,25 @@
             justify-content: flex-end;
             gap: 10px;
 
+            .saleForDiv {
+                display: flex;
+                gap: 5px;
+
+                .price {
+                    font-weight: bolder;
+                    font-size: 30px;
+                }
+
+                .priceInput {
+                    font-weight: bolder;
+                    background-color: var(--button-grey-outline);
+                    padding: 0 5px;
+                    font-size: 18px;
+                    width: 100px;
+                    border: none;
+                }
+            }
+
             .price {
                 font-weight: bolder;
                 font-size: 30px;
@@ -88,13 +113,13 @@
                 background-color: var(--orange);
                 padding: 10px;
                 font-weight: bold;
-                font-size: 16px;
+                font-size: 18px;
                 border-radius: 10px;
                 cursor: pointer;
                 transition: all 0.3s ease-in-out;
 
-                &:hover{
-                    transform: scale(1.05);
+                &:hover {
+                    background-color: var(--hover-orange);
                 }
             }
 

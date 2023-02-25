@@ -1,6 +1,7 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import ConditionalContent from '../../components/ConditionalContent';
 import PageWrapper from '../../components/PageWrapper';
 import { Pokemon } from '../../constant/pokemonInterface';
 import TYPES from '../../constant/types';
@@ -13,9 +14,10 @@ export interface IDetailProps {
 export default function Detail(props: IDetailProps) {
   const { id } = useParams();
   const [pokemon, setPokemon] = useState<Pokemon | null>(null);
+  const priceRef = useRef<HTMLInputElement | null>(null);
 
   // TODO: call api to fetch owner name
-  const [ownerName, setOwnerName] = useState<string>("@Nobody");
+  const [ownerName, setOwnerName] = useState<string>("-");
 
   const currentUser = useAppSelector((state: any) => state.auth.currentUser);
 
@@ -43,6 +45,14 @@ export default function Detail(props: IDetailProps) {
     });
 
     console.log(res);
+  }
+
+  const handleSellPokemon = async () => {
+    // TODO: call api to sell pokemon
+  }
+
+  const handleCancelSell = async () => {
+    // TODO: call api to cancel sell
   }
 
   const convertPokedexNum = (num: number): string => {
@@ -142,13 +152,62 @@ export default function Detail(props: IDetailProps) {
             ]}
           />
           <div className={styles.btmSection}>
-            <p className={styles.price}>{pokemon.forSale ? `$${pokemon.price}` : "Unavailable"}</p>
-            <button
-              onClick={handleBuyPokemon}
-              className={`${styles.buyBtn} ${!pokemon.forSale && styles.unavailable}`}
-            >
-              Buy Now
-            </button>
+            <ConditionalContent
+              condition={currentUser && currentUser.pokemons.includes(pokemon._id)}
+              first={
+                <div className={styles.saleForDiv}>
+                  <p className={styles.price}>Sale for $</p>
+                  <ConditionalContent
+                    condition={pokemon.forSale}
+                    first={
+                      <p className={styles.price}>{pokemon.price}</p>
+                    }
+                    second={
+                      <input
+                        className={`${styles.priceInput}`}
+                        type="number"
+                        ref={priceRef}
+                      />
+                    }
+                  />
+                </div>
+              }
+              second={
+                <p className={styles.price}>{pokemon.forSale ? `$${pokemon.price}` : "Unavailable"}</p>
+              }
+            />
+            <ConditionalContent
+              condition={currentUser && currentUser.pokemons.includes(pokemon._id)}
+              first={
+                <ConditionalContent
+                  condition={pokemon.forSale}
+                  first={
+                    <button
+                      onClick={handleCancelSell}
+                      className={styles.buyBtn}
+                    >
+                      Cancel
+                    </button>
+                  }
+                  second={
+                    <button
+                      onClick={handleSellPokemon}
+                      className={styles.buyBtn}
+                    >
+                      Sell Now
+                    </button>
+                  }
+                />
+              }
+              second={
+                <button
+                  onClick={handleBuyPokemon}
+                  className={`${styles.buyBtn} ${!pokemon.forSale && styles.unavailable}`}
+                >
+                  Buy Now
+                </button>
+              }
+            />
           </div>
         </div>
       </div>
