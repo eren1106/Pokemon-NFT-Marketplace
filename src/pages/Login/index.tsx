@@ -1,6 +1,6 @@
 import { CircularProgress } from '@mui/material';
 import React, { FormEvent } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { Navigate, NavLink, useNavigate } from 'react-router-dom';
 import { loginUser } from '../../features/authSlice';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import styles from '../Register/Register.module.scss';
@@ -13,6 +13,11 @@ const Login: React.FunctionComponent<ILoginProps> = (props) => {
     const navigate = useNavigate();
     const error = useAppSelector((state) => state.auth.error);
     const loading = useAppSelector((state) => state.auth.loading);
+    const currentUser = useAppSelector(state => state.auth.currentUser);
+
+    if (currentUser) {
+        return <Navigate to="/" />;
+    }
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();

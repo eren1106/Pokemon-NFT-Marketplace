@@ -128,6 +128,11 @@ input::-webkit-inner-spin-button {
                 opacity: 0.5;
             }
         }
+
+        .message {
+            align-self: flex-end;
+            color: var(--orange);
+        }
     }
 
 }

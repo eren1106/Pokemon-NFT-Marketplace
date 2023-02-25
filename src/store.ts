@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit'
 import selectedTitleReducer from './features/selectedTitleSlice'
 import authReducer from './features/authSlice'
+import pokemonReducer from './features/pokemonSlice'
 
 export const store = configureStore({
   reducer: {
     selectedTitle: selectedTitleReducer,
     auth: authReducer,
+    pokemon: pokemonReducer,
   }
 })
 

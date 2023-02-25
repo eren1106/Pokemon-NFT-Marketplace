@@ -33,6 +33,10 @@ export default function Detail(props: IDetailProps) {
   }, [id]);
 
   const handleBuyPokemon = async () => {
+    if (!pokemon?.forSale) {
+      alert("Pokemon not for sale");
+      return;
+    }
     if (currentUser.coins < pokemon?.price!) {
       alert("Not enough coins");
       return;
@@ -202,13 +206,21 @@ export default function Detail(props: IDetailProps) {
               second={
                 <button
                   onClick={handleBuyPokemon}
-                  className={`${styles.buyBtn} ${!pokemon.forSale && styles.unavailable}`}
+                  className={`${styles.buyBtn} ${(!currentUser || !pokemon.forSale) && styles.unavailable}`}
                 >
                   Buy Now
                 </button>
               }
             />
           </div>
+          <ConditionalContent
+            condition={!currentUser}
+            first={
+              <p className={styles.message}>
+                Log in to buy {pokemon.name}!
+              </p>
+            }
+          />
         </div>
       </div>
     </PageWrapper>

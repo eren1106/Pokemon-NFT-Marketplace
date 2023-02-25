@@ -1,50 +1,67 @@
+import { CircularProgress } from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import ConditionalContent from '../../components/ConditionalContent';
 import PageWrapper from '../../components/PageWrapper';
 import PokemonCard from '../../components/PokemonCard';
 import { Pokemon } from '../../constant/pokemonInterface';
+import { getAllPokemons } from '../../features/pokemonSlice';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import styles from './Shop.module.scss';
 
 export interface IShopProps {
 }
 
 export default function Shop(props: IShopProps) {
-  const [allPokemons, setAllPokemons] = useState<Pokemon[]>([]);
-
-  const fetchAllPokemons = async () => {
-    const { data } = await axios.get(`${process.env.REACT_APP_SERVER_URL}/pokemons`);
-    data.sort((a: Pokemon, b: Pokemon) => a.no - b.no)
-    setAllPokemons(data);
-    console.log(data);
-  }
+  const dispatch = useAppDispatch();
+  const pokemons = useAppSelector((state) => state.pokemon.pokemons);
+  const loading = useAppSelector((state) => state.pokemon.loading);
+  const error = useAppSelector((state) => state.pokemon.error);
 
   useEffect(() => {
-    fetchAllPokemons();
-  }, []);
+    dispatch(getAllPokemons())
+  }, [dispatch]);
 
   return (
     <PageWrapper
       title="Shop"
     >
       <div className={styles.shop}>
-      <div className={styles.cardsWrapper}>
-        {
-          allPokemons.map((pokemon) =>
-            <PokemonCard
-              key={pokemon._id}
-              id={pokemon._id}
-              name={pokemon.name}
-              index={pokemon.index}
-              imgUrl={pokemon.imgUrl}
-              types={pokemon.types}
-              level={pokemon.level}
-              price={pokemon.price}
-              ownerID={pokemon.ownerID}
+        <ConditionalContent
+          condition={loading}
+          first={<CircularProgress sx={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+          }} />}
+          second={
+            <ConditionalContent
+              condition={!!error}
+              first={<p>{error}</p>}
+              second={
+                <div className={styles.cardsWrapper}>
+                  {
+                    pokemons.map((pokemon) =>
+                      <PokemonCard
+                        key={pokemon._id}
+                        id={pokemon._id}
+                        name={pokemon.name}
+                        index={pokemon.index}
+                        imgUrl={pokemon.imgUrl}
+                        types={pokemon.types}
+                        level={pokemon.level}
+                        price={pokemon.price}
+                        ownerID={pokemon.ownerID}
+                      />
+                    )
+                  }
+                </div>
+              }
             />
-          )
-        }
+          }
+        />
       </div>
-    </div>
     </PageWrapper>
   );
 }
