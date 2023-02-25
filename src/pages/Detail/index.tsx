@@ -1,10 +1,10 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import PageWrapper from '../../components/PageWrapper';
 import { Pokemon } from '../../constant/pokemonInterface';
 import TYPES from '../../constant/types';
+import { useAppSelector } from '../../hooks';
 import styles from './Detail.module.scss';
 
 export interface IDetailProps {
@@ -17,7 +17,7 @@ export default function Detail(props: IDetailProps) {
   // TODO: call api to fetch owner name
   const [ownerName, setOwnerName] = useState<string>("@Nobody");
 
-  const currentUser = useSelector((state: any) => state.currentUser.currentUser);
+  const currentUser = useAppSelector((state: any) => state.auth.currentUser);
 
   useEffect(() => {
     const fetchPokemonData = async () => {

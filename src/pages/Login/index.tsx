@@ -1,9 +1,8 @@
-import axios from 'axios';
-import React, { FormEvent, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { User } from '../../constant/userInterface';
-import { setCurrentUser } from '../../features/currentUserSlice';
-import { useAppDispatch } from '../../hooks';
+import { CircularProgress } from '@mui/material';
+import React, { FormEvent } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { loginUser } from '../../features/authSlice';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import styles from '../Register/Register.module.scss';
 
 interface ILoginProps {
@@ -12,53 +11,23 @@ interface ILoginProps {
 const Login: React.FunctionComponent<ILoginProps> = (props) => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
-    const emailRef = useRef<HTMLInputElement>(null);
-    const passwordRef = useRef<HTMLInputElement>(null);
+    const error = useAppSelector((state) => state.auth.error);
+    const loading = useAppSelector((state) => state.auth.loading);
 
-    const login = async () => {
-        const email = emailRef.current?.value;
-        const password = passwordRef.current?.value;
-
-        if(!email || !password) {
-            // TODO: Show proper error message above login button
-            alert("Please complete all the fields");
-            return;
-        }
-
-        try {
-            // TODO: Show loading
-            const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/auth/login`, {
-                email,
-                password,
-            });
-            
-            // TODO: Setup thunk and do this inside createAsyncThunk
-            if(res.status === 200) {
-                const { data } = res;
-                const currentUser: User = {
-                    _id: data._id,
-                    name: data.name,
-                    email: data.email,
-                    pokemons: data.pokemons,
-                    coins: data.coins
-                }
-                dispatch(setCurrentUser(currentUser));
-
-                navigate('/');
-            }
-        }
-        catch(err) {
-            console.log(err);
-            alert(err);
-        }
-
-        // TODO: Show "invalid password or email" if login fail
-        // TODO: Navigate to home page if success
-    }
-
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        login();
+        const formData = new FormData(e.currentTarget);
+        const email = formData.get('email') as string;
+        const password = formData.get('password') as string;
+
+        dispatch(loginUser({ email, password })).unwrap()
+            .then(() => {
+                navigate("/");
+            })
+            .catch((err) => {
+                // TODO: Show "invalid password or email" if login fail
+                console.error('Login failed:', err);
+            })
     }
 
     return (
@@ -72,18 +41,27 @@ const Login: React.FunctionComponent<ILoginProps> = (props) => {
                 <input
                     className={styles.textfield}
                     type="email"
-                    ref={emailRef}
+                    name="email"
                     placeholder="Email"
+                    required
                 />
                 <input
                     className={styles.textfield}
                     type="password"
-                    ref={passwordRef}
+                    name="password"
                     placeholder="Password"
+                    required
                 />
+                <p className={styles.error}>{error && "Authentication failed"}</p>
                 <button type="submit" className={styles.btn}>
-                    Login
+                    {loading ? <CircularProgress size={25} thickness={6} /> : "Login"}
                 </button>
+                <NavLink
+                    to="/register"
+                    className={styles.link}
+                >
+                    Don't have an account? Register here
+                </NavLink>
             </form>
         </div>
     );
