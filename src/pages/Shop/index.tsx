@@ -45,14 +45,7 @@ export default function Shop(props: IShopProps) {
                     pokemons.map((pokemon) =>
                       <PokemonCard
                         key={pokemon._id}
-                        id={pokemon._id}
-                        name={pokemon.name}
-                        index={pokemon.index}
-                        imgUrl={pokemon.imgUrl}
-                        types={pokemon.types}
-                        level={pokemon.level}
-                        price={pokemon.price}
-                        ownerID={pokemon.ownerID}
+                        pokemon={pokemon}
                       />
                     )
                   }

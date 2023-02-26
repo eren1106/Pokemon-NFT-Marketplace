@@ -50,6 +50,11 @@ export const registerUser = createAsyncThunk('auth/registerUser', async ({ name,
   return res.data;
 });
 
+// export const refreshUser = createAsyncThunk('auth/refreshUser', async (id: string) => {
+//   const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/user/${id}`);
+//   return res.data;
+// });
+
 export const currentUserSlice = createSlice({
   name: 'auth',
   // `createSlice` will infer the state type from the `initialState` argument
@@ -102,6 +107,20 @@ export const currentUserSlice = createSlice({
         state.loading = false;
         state.error = action.error.message;
       })
+
+      // REFRESH USER
+      // .addCase(refreshUser.pending, (state, action) => {
+      //   state.loading = true;
+      //   state.error = null;
+      // })
+      // .addCase(refreshUser.fulfilled, (state, action) => {
+      //   state.loading = false;
+      //   state.currentUser = action.payload;
+      // })
+      // .addCase(refreshUser.rejected, (state, action) => {
+      //   state.loading = false;
+      //   state.error = action.error.message;
+      // })
   }
 })
 

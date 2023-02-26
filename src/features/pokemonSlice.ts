@@ -36,7 +36,7 @@ export const getAllPokemons = createAsyncThunk('pokemon/getAllPokemons', async (
   return res.data;
 });
 
-export const getPokemonById = createAsyncThunk('pokemon/getPokemonById', async (id) => {
+export const getPokemonById = createAsyncThunk('pokemon/getPokemonById', async (id: string) => {
   const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/pokemons/${id}`);
   return res.data;
 });
@@ -47,12 +47,12 @@ export const createPokemon = createAsyncThunk('pokemon/createPokemon', async (ne
 });
 
 export const buyPokemon = createAsyncThunk('pokemon/buyPokemon', async (buyInfo: BuyInfo) => {
-  const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/pokemons/sell`, buyInfo);
+  const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/pokemons/buy`, buyInfo);
   return res.data;
 });
 
-export const sellPokemon = createAsyncThunk('pokemon/sellyPokemon', async (sellInfo: SellInfo) => {
-  const res = await axios.put(`${process.env.REACT_APP_SERVER_URL}/pokemons/buy`, sellInfo);
+export const sellPokemon = createAsyncThunk('pokemon/sellPokemon', async (sellInfo: SellInfo) => {
+  const res = await axios.put(`${process.env.REACT_APP_SERVER_URL}/pokemons/sell`, sellInfo);
   return res.data;
 });
 

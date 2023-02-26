@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 interface IConditionalContentProps {
-  condition: boolean;
+  condition: boolean | undefined;
   first: React.ReactNode;
   second?: React.ReactNode
 }

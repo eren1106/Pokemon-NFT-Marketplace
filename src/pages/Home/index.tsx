@@ -7,7 +7,7 @@ export interface IHomeProps {
 }
 
 export default function Home(props: IHomeProps) {
-  const pokemonQuantity = 25;
+  const pokemonQuantity = 50; // generate how many pokemons
   const capitalizeFirstLetter = (str: string): string => { // Capitalize pokemon name (only first letter)
     return str.charAt(0).toUpperCase() + str.slice(1);
   }

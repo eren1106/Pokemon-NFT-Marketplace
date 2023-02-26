@@ -30,7 +30,7 @@ const Register: React.FunctionComponent<IRegisterProps> = (props) => {
         }
         dispatch(registerUser({ name, email, password })).unwrap()
             .then(() => {
-                navigate("/");
+                navigate("/login");
             })
             .catch((err) => {
                 // TODO: Show "invalid password or email" if login fail
