@@ -6,6 +6,7 @@ import ConditionalContent from '../../components/ConditionalContent';
 import PageWrapper from '../../components/PageWrapper';
 import { Pokemon } from '../../constant/pokemonInterface';
 import TYPES from '../../constant/types';
+import { refreshUser } from '../../features/authSlice';
 import { buyPokemon, getPokemonById, sellPokemon } from '../../features/pokemonSlice';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import styles from './Detail.module.scss';
@@ -30,7 +31,13 @@ export default function Detail(props: IDetailProps) {
   const currentUser = useAppSelector((state: any) => state.auth.currentUser);
 
   useEffect(() => {
-    if (id) dispatch(getPokemonById(id));
+    dispatch(refreshUser());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (id) {
+      dispatch(getPokemonById(id))
+    };
   }, [id, dispatch]);
 
   useEffect(() => {
@@ -40,7 +47,6 @@ export default function Detail(props: IDetailProps) {
         try {
           const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/users/${pokemon.ownerID}`);
           setOwnerName(res.data.name);
-          console.log(res.data.name)
         }
         catch (err) {
           console.error(err);
@@ -81,7 +87,9 @@ export default function Detail(props: IDetailProps) {
         buyerId: currentUser._id,
         sellerId: pokemon?.ownerID!,
         price: pokemon?.price,
-      }));
+      })).unwrap().then(() => {
+        window.location.reload();
+      });
     }
   }
 
@@ -90,6 +98,12 @@ export default function Detail(props: IDetailProps) {
     const paddedNum = num.toString().padStart(3, '0');
     return `#${paddedNum}`;
   }
+
+  useEffect(() => {
+    if(currentUser) {
+      console.log("CURRENT USER", currentUser);
+    }
+  }, [currentUser]);
 
   // CONTENT
   let content;

@@ -2,6 +2,9 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios';
 import { Pokemon } from '../constant/pokemonInterface';
 import { User } from '../constant/userInterface'
+import { useAppDispatch, useAppSelector } from '../hooks';
+import { refreshUser } from './authSlice';
+
 // Define a type for the slice state
 interface PokemonState {
   pokemons: Array<Pokemon>,

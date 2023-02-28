@@ -25,7 +25,6 @@ const PokemonCard: React.FC<IPokemonCardProps> = ({
         try {
           const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/users/${pokemon.ownerID}`);
           setOwnerName(`@${res.data.name}`);
-          console.log(res.data.name)
         }
         catch (err) {
           console.error(err);

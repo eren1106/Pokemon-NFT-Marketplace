@@ -50,10 +50,12 @@ export const registerUser = createAsyncThunk('auth/registerUser', async ({ name,
   return res.data;
 });
 
-// export const refreshUser = createAsyncThunk('auth/refreshUser', async (id: string) => {
-//   const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/user/${id}`);
-//   return res.data;
-// });
+export const refreshUser = createAsyncThunk('auth/refreshUser', async () => {
+  const storedUser = JSON.parse(localStorage.getItem('currentUser')!);
+  const id = storedUser._id;
+  const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/users/${id}`);
+  return res.data;
+});
 
 export const currentUserSlice = createSlice({
   name: 'auth',
@@ -109,18 +111,19 @@ export const currentUserSlice = createSlice({
       })
 
       // REFRESH USER
-      // .addCase(refreshUser.pending, (state, action) => {
-      //   state.loading = true;
-      //   state.error = null;
-      // })
-      // .addCase(refreshUser.fulfilled, (state, action) => {
-      //   state.loading = false;
-      //   state.currentUser = action.payload;
-      // })
-      // .addCase(refreshUser.rejected, (state, action) => {
-      //   state.loading = false;
-      //   state.error = action.error.message;
-      // })
+      .addCase(refreshUser.pending, (state, action) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(refreshUser.fulfilled, (state, action) => {
+        state.loading = false;
+        state.currentUser = action.payload;
+        localStorage.setItem('currentUser', JSON.stringify(action.payload));
+      })
+      .addCase(refreshUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      })
   }
 })
 
