@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { Pokemon } from '../../constant/pokemonInterface';
 import TYPES from '../../constant/types';
 import styles from './PokemonCard.module.scss';
+import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
+import { useAppSelector } from '../../hooks';
 
 interface IPokemonCardProps {
   pokemon: Pokemon,
@@ -17,7 +19,7 @@ const PokemonCard: React.FC<IPokemonCardProps> = ({
     navigate(pokemon._id!);
   }
   const [ownerName, setOwnerName] = useState("No owner");
-
+  const currentUser = useAppSelector((state) => state.auth.currentUser);
   useEffect(() => {
     if (pokemon.ownerID) {
       // fetch owner name
@@ -58,6 +60,7 @@ const PokemonCard: React.FC<IPokemonCardProps> = ({
           {/* <div className={styles.diamond}>
             <p className={styles.index}>{pokemon.index}</p>
           </div> */}
+          {currentUser?._id === pokemon.ownerID && <ShoppingBagIcon />}
         </div>
         <img className={styles.pokemonImage} src={pokemon.imgUrl} alt="pokemon" />
         <p className={styles.level}>Lv. {pokemon.level}</p>

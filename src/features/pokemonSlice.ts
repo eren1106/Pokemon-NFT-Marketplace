@@ -75,7 +75,12 @@ export const currentUserSlice = createSlice({
       .addCase(getAllPokemons.fulfilled, (state, action) => {
         state.loading = false;
         const pokemons = action.payload;
-        pokemons.sort((a: Pokemon, b: Pokemon) => a.no - b.no)
+        pokemons.sort((a: Pokemon, b: Pokemon) => a.no - b.no);
+        pokemons.sort((a: Pokemon, b: Pokemon) => {
+          if(a.forSale === b.forSale) return a.no - b.no;
+          if(a.forSale) return -1;
+          return 1;
+        })
         state.pokemons = pokemons;
       })
       .addCase(getAllPokemons.rejected, (state, action) => {
