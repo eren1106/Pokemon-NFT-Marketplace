@@ -63,12 +63,15 @@ export const currentUserSlice = createSlice({
   initialState,
   reducers: {
     // Use the PayloadAction type to declare the contents of `action.payload`
-    logoutUser: (state, action) => {
+    logoutUser: (state) => {
       state.currentUser = null;
       localStorage.removeItem('currentUser');
     },
     setAuthError: (state, action) => {
       state.error = action.payload;
+    },
+    clearError: (state) => {
+      state.error = null;
     }
   },
   extraReducers(builder) {
@@ -119,6 +122,7 @@ export const currentUserSlice = createSlice({
         state.loading = false;
         state.currentUser = action.payload;
         localStorage.setItem('currentUser', JSON.stringify(action.payload));
+        console.log("SUP");
       })
       .addCase(refreshUser.rejected, (state, action) => {
         state.loading = false;
@@ -127,6 +131,6 @@ export const currentUserSlice = createSlice({
   }
 })
 
-export const { logoutUser, setAuthError } = currentUserSlice.actions
+export const { logoutUser, setAuthError, clearError } = currentUserSlice.actions
 
 export default currentUserSlice.reducer

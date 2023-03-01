@@ -36,7 +36,7 @@ export default function Detail(props: IDetailProps) {
 
   useEffect(() => {
     if (id) {
-      dispatch(getPokemonById(id))
+      dispatch(getPokemonById(id));
     };
   }, [id, dispatch]);
 
@@ -98,12 +98,6 @@ export default function Detail(props: IDetailProps) {
     const paddedNum = num.toString().padStart(3, '0');
     return `#${paddedNum}`;
   }
-
-  useEffect(() => {
-    if(currentUser) {
-      console.log("CURRENT USER", currentUser);
-    }
-  }, [currentUser]);
 
   // CONTENT
   let content;

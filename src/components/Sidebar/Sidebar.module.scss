@@ -68,6 +68,10 @@
             .navText {
                 font-weight: bold;
             }
+
+            .navText.isClosed {
+                display: none;
+            }
         }
 
         .navItem.selectedItem {
@@ -98,6 +102,10 @@
             .btnText {
                 font-size: 15px;
                 font-weight: 600;
+            }
+
+            .btnText.isClosed {
+                display: none;
             }
         }
 

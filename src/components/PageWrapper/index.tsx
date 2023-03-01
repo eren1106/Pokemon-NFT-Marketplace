@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { setTitle } from '../../features/selectedTitleSlice';
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import Sidebar from '../Sidebar';
 import styles from './PageWrapper.module.scss';
 import MenuIcon from '@mui/icons-material/Menu';
 import Topbar from '../Topbar';
+import { setClose } from '../../features/sidebarSlice';
 
 interface IPageWrapperProps {
     children?: React.ReactNode;
@@ -12,12 +13,12 @@ interface IPageWrapperProps {
 }
 
 const PageWrapper: React.FunctionComponent<IPageWrapperProps> = ({ children, title }) => {
-    const [isClosed, setIsClosed] = useState<boolean>(false);
+    const dispatch = useAppDispatch();
+    const isClosed = useAppSelector((state) => state.sidebar.isClosed);
 
     const handleToggle = () => {
-        setIsClosed(!isClosed);
+        dispatch(setClose(!isClosed));
     }
-    const dispatch = useAppDispatch();
 
     useEffect(() => {
         dispatch(setTitle(title));

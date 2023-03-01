@@ -54,9 +54,9 @@ const Sidebar: React.FC<ISidebarProps> = ({ onToggle, isClosed }) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const handleToLogin = () => {
-    if (currentUser) {
-      dispatch(logoutUser({}));
+  const handleLog = () => {
+    if (currentUser) { // if current user exist then logout
+      dispatch(logoutUser());
     }
     navigate("/login");
   }
@@ -95,27 +95,27 @@ const Sidebar: React.FC<ISidebarProps> = ({ onToggle, isClosed }) => {
               }}
             >
               {item.icon}
-              {!isClosed && <p className={styles.navText}>{item.name}</p>}
+              <p className={`${styles.navText} ${isClosed && styles.isClosed}`}>{item.name}</p>
             </NavLink>
           )
         }
       </div>
       <button
         className={styles.logBtn}
-        onClick={handleToLogin}
+        onClick={handleLog}
       >
         <ConditionalContent
           condition={!!currentUser}
           first={
             <div className={styles.btnContent}>
               <LogoutIcon />
-              <p className={styles.btnText}>Log out</p>
+              <p className={`${styles.btnText} ${isClosed && styles.isClosed}`}>Log out</p>
             </div>
           }
           second={
             <div className={styles.btnContent}>
               <LoginIcon />
-              <p className={styles.btnText}>Log in</p>
+              <p className={`${styles.btnText} ${isClosed && styles.isClosed}`}>Log in</p>
             </div>
           }
         />

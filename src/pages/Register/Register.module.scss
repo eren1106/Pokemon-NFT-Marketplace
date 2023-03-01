@@ -1,3 +1,14 @@
+/* handle autocomplete color */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 100px var(--background-dark) inset !important;
+}
+input:-webkit-autofill{
+    -webkit-text-fill-color: white !important;
+}
+
 .wrapper {
     display: flex;
     flex-direction: column;
@@ -20,7 +31,7 @@
         align-items: center;
         gap: 18px;
         width: 450px;
-        
+
         .textfield {
             background-color: var(--background-dark);
             color: white;
@@ -30,7 +41,7 @@
             border: 2px solid var(--button-grey-outline);
             border-radius: 10px;
             width: 100%;
-            
+
             &::placeholder {
                 color: var(--grey-text);
             }
