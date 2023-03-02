@@ -9,7 +9,7 @@ const initialState: SidebarState = {
   isClosed: false,
 }
 
-export const selectedTitleSlice = createSlice({
+export const sidebarSlice = createSlice({
   name: 'sidebar',
   // `createSlice` will infer the state type from the `initialState` argument
   initialState,
@@ -21,6 +21,6 @@ export const selectedTitleSlice = createSlice({
   }
 })
 
-export const { setClose } = selectedTitleSlice.actions
+export const { setClose } = sidebarSlice.actions
 
-export default selectedTitleSlice.reducer
+export default sidebarSlice.reducer

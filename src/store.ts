@@ -3,6 +3,7 @@ import selectedTitleReducer from './features/selectedTitleSlice'
 import authReducer from './features/authSlice'
 import pokemonReducer from './features/pokemonSlice'
 import sidebarReducer from './features/sidebarSlice'
+import topbarReducer from './features/topbarSlice'
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     auth: authReducer,
     pokemon: pokemonReducer,
     sidebar: sidebarReducer,
+    topbar: topbarReducer,
   }
 })
 

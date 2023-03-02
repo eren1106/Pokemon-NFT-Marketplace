@@ -15,9 +15,9 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
           <Route path="/shop" element={<Shop />} />
-          <Route path="/shop/:id" element={<Detail />} />
-          <Route path="/collections" element={<Collection />} />
-          <Route path="/collections/:id" element={<Detail />} />
+          <Route path="/shop/:id" element={<Detail backRoute="/shop"/>} />
+          <Route path="/collection" element={<Collection />} />
+          <Route path="/collection/:id" element={<Detail backRoute="/collection"/>} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />

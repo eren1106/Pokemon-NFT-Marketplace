@@ -4,17 +4,18 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import ConditionalContent from '../../components/ConditionalContent';
 import PageWrapper from '../../components/PageWrapper';
-import { Pokemon } from '../../constant/pokemonInterface';
 import TYPES from '../../constant/types';
 import { refreshUser } from '../../features/authSlice';
 import { buyPokemon, getPokemonById, sellPokemon } from '../../features/pokemonSlice';
+import { setBackRoute } from '../../features/topbarSlice';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import styles from './Detail.module.scss';
 
 export interface IDetailProps {
+  backRoute: string,
 }
 
-export default function Detail(props: IDetailProps) {
+const Detail: React.FC<IDetailProps> = ({backRoute}) => {
   const { id } = useParams();
   const dispatch = useAppDispatch();
   const pokemon = useAppSelector((state) => state.pokemon.currentPokemon);
@@ -22,10 +23,8 @@ export default function Detail(props: IDetailProps) {
   const error = useAppSelector((state) => state.pokemon.error);
   const tradeLoading = useAppSelector((state) => state.pokemon.tradeLoading);
   const tradeError = useAppSelector((state) => state.pokemon.tradeError);
-  const userLoading = useAppSelector((state) => state.auth.loading);
   const priceRef = useRef<HTMLInputElement | null>(null);
 
-  // TODO: call api to fetch owner name
   const [ownerName, setOwnerName] = useState<string>("-");
 
   const currentUser = useAppSelector((state: any) => state.auth.currentUser);
@@ -33,6 +32,14 @@ export default function Detail(props: IDetailProps) {
   useEffect(() => {
     dispatch(refreshUser());
   }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(setBackRoute(backRoute)); // there is a back button in detail page, will set the back route here
+
+    return () => { // React unmount
+      dispatch(setBackRoute(null));
+    }
+  }, [dispatch, backRoute]);
 
   useEffect(() => {
     if (id) {
@@ -250,38 +257,6 @@ export default function Detail(props: IDetailProps) {
               }
             />
           </button>
-          {/* <ConditionalContent
-            condition={currentUser && currentUser.pokemons.includes(pokemon?._id)}
-            first={
-              <ConditionalContent
-                condition={pokemon?.forSale}
-                first={
-                  <button
-                    onClick={handleCancelSell}
-                    className={styles.buyBtn}
-                  >
-                    Cancel
-                  </button>
-                }
-                second={
-                  <button
-                    onClick={handleSellPokemon}
-                    className={styles.buyBtn}
-                  >
-                    Sell Now
-                  </button>
-                }
-              />
-            }
-            second={
-              <button
-                onClick={handleBuyPokemon}
-                className={`${styles.buyBtn} ${(!currentUser || !pokemon?.forSale) && styles.unavailable}`}
-              >
-                Buy Now
-              </button>
-            }
-          /> */}
         </div>
         <ConditionalContent
           condition={!currentUser}
@@ -339,3 +314,6 @@ const Info: React.FC<InfoProps> = ({
     </div>
   );
 };
+
+export default Detail;
+

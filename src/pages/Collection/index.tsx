@@ -41,7 +41,7 @@ export default function Collection(props: ICollectionProps) {
     </div>
 
   return (
-    <PageWrapper title="Collections">
+    <PageWrapper title="Collection">
       <div className={styles.collection}>
         {content}
       </div>

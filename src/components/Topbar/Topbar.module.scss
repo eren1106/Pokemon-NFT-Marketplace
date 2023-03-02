@@ -3,7 +3,19 @@
     border-bottom: 1px solid var(--topbar-stroke);
     padding: 15px;
 
-    h1{
-        font-size: 25px;
+    .left {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        .backBtn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        .title{
+            font-size: 25px;
+        }
     }
 }

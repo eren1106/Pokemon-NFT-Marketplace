@@ -36,8 +36,8 @@ const menuItems: MenuItem[] = [
     icon: <AddShoppingCartIcon className={styles.icon} />
   },
   {
-    path: "/collections",
-    name: "Collections",
+    path: "/collection",
+    name: "Collection",
     icon: <CollectionsBookmarkIcon className={styles.icon} />
   },
   {

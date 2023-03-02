@@ -114,7 +114,7 @@ export const TYPES: Types = {
     },
     fairy: {
         name: "Fairy",
-        imageUrl: "https://archives.bulbagarden.net/media/upload/3/3b/Fairy_icon_SwSh.png",
+        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Pok%C3%A9mon_Fairy_Type_Icon.svg/180px-Pok%C3%A9mon_Fairy_Type_Icon.svg.png",
         color: "#EE99AC",
     }
 };
