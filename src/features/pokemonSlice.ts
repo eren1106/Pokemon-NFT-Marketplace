@@ -44,6 +44,11 @@ export const getPokemonById = createAsyncThunk('pokemon/getPokemonById', async (
   return res.data;
 });
 
+export const getPokemonsByUserId = createAsyncThunk('pokemon/getPokemonsByUserId', async (userId: string) => {
+  const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/pokemons/user/${userId}`);
+  return res.data;
+});
+
 export const createPokemon = createAsyncThunk('pokemon/createPokemon', async (newPokemon: Pokemon) => {
   const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/pokemons/create`, newPokemon);
   return res.data;
@@ -99,6 +104,28 @@ export const currentUserSlice = createSlice({
         state.currentPokemon = action.payload;
       })
       .addCase(getPokemonById.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      })
+
+      // GET POKEMON BY USER ID
+      .addCase(getPokemonsByUserId.pending, (state, action) => {
+        state.loading = true;
+        state.error = null;
+        state.currentPokemon = null;
+      })
+      .addCase(getPokemonsByUserId.fulfilled, (state, action) => {
+        state.loading = false;
+        const pokemons = action.payload;
+        pokemons.sort((a: Pokemon, b: Pokemon) => a.no - b.no);
+        pokemons.sort((a: Pokemon, b: Pokemon) => {
+          if(a.forSale === b.forSale) return a.no - b.no;
+          if(a.forSale) return -1;
+          return 1;
+        })
+        state.pokemons = pokemons;
+      })
+      .addCase(getPokemonsByUserId.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       })

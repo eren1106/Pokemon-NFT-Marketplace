@@ -22,7 +22,7 @@ export default function Detail(props: IDetailProps) {
   const error = useAppSelector((state) => state.pokemon.error);
   const tradeLoading = useAppSelector((state) => state.pokemon.tradeLoading);
   const tradeError = useAppSelector((state) => state.pokemon.tradeError);
-  // const [pokemon, setPokemon] = useState<Pokemon | null>(null);
+  const userLoading = useAppSelector((state) => state.auth.loading);
   const priceRef = useRef<HTMLInputElement | null>(null);
 
   // TODO: call api to fetch owner name

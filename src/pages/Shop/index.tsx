@@ -1,10 +1,8 @@
 import { CircularProgress } from '@mui/material';
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import ConditionalContent from '../../components/ConditionalContent';
 import PageWrapper from '../../components/PageWrapper';
 import PokemonCard from '../../components/PokemonCard';
-import { Pokemon } from '../../constant/pokemonInterface';
 import { getAllPokemons } from '../../features/pokemonSlice';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import styles from './Shop.module.scss';
@@ -22,38 +20,32 @@ export default function Shop(props: IShopProps) {
     dispatch(getAllPokemons())
   }, [dispatch]);
 
+  let content;
+  if (loading) content = <CircularProgress sx={{
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+  }} />
+  else if (error) content = <p>{error}</p>
+  else content =
+    <div className={styles.cardsWrapper}>
+      {
+        pokemons.map((pokemon) =>
+          <PokemonCard
+            key={pokemon._id}
+            pokemon={pokemon}
+          />
+        )
+      }
+    </div>
+
   return (
     <PageWrapper
       title="Shop"
     >
       <div className={styles.shop}>
-        <ConditionalContent
-          condition={loading}
-          first={<CircularProgress sx={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-          }} />}
-          second={
-            <ConditionalContent
-              condition={!!error}
-              first={<p>{error}</p>}
-              second={
-                <div className={styles.cardsWrapper}>
-                  {
-                    pokemons.map((pokemon) =>
-                      <PokemonCard
-                        key={pokemon._id}
-                        pokemon={pokemon}
-                      />
-                    )
-                  }
-                </div>
-              }
-            />
-          }
-        />
+        {content}
       </div>
     </PageWrapper>
   );
