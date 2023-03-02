@@ -10,12 +10,14 @@ import { buyPokemon, getPokemonById, sellPokemon } from '../../features/pokemonS
 import { setBackRoute } from '../../features/topbarSlice';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import styles from './Detail.module.scss';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 export interface IDetailProps {
   backRoute: string,
 }
 
-const Detail: React.FC<IDetailProps> = ({backRoute}) => {
+const Detail: React.FC<IDetailProps> = ({ backRoute }) => {
   const { id } = useParams();
   const dispatch = useAppDispatch();
   const pokemon = useAppSelector((state) => state.pokemon.currentPokemon);
@@ -47,9 +49,8 @@ const Detail: React.FC<IDetailProps> = ({backRoute}) => {
     };
   }, [id, dispatch]);
 
-  useEffect(() => {
+  useEffect(() => { // fetch owner name
     if (pokemon?.ownerID) {
-      // fetch owner name
       const fetchOwner = async () => {
         try {
           const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/users/${pokemon.ownerID}`);
@@ -66,18 +67,20 @@ const Detail: React.FC<IDetailProps> = ({backRoute}) => {
   const handleTradePokemon = async () => {
     if (currentUser && currentUser.pokemons.includes(pokemon?._id)) {
       if (pokemon?.forSale) { // cancel
-
+        // TODO: Cancel sell
       }
       else { // sell
         const price = priceRef.current?.value;
-        if(price === "") {
+        if (price === "") {
           alert("Cannot be empty");
           return;
         }
         dispatch(sellPokemon({
           pokemonId: id!,
           price: parseInt(price!),
-        }));
+        })).unwrap().then(() => {
+          window.location.reload();
+        });;
       }
     }
     else { // buy
@@ -120,7 +123,12 @@ const Detail: React.FC<IDetailProps> = ({backRoute}) => {
   else {
     content = <>
       <div className={styles.left}>
-        <h1 className={styles.name}>{pokemon?.name}</h1>
+        <div className={styles.leftTop}>
+          <h1>{pokemon?.name}</h1>
+          <div className={styles.favourite}>
+            <FavoriteBorderIcon className={styles.icon} />
+          </div>
+        </div>
         <img className={styles.pokemonImg} src={pokemon?.imgUrl} alt="pokemon" />
       </div>
       <div className={styles.right}>

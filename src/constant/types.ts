@@ -54,7 +54,7 @@ export const TYPES: Types = {
     },
     ice: {
         name: "Ice",
-        imageUrl: "https://archives.bulbagarden.net/media/upload/6/66/Ice_icon_SwSh.png",
+        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Pok%C3%A9mon_Ice_Type_Icon.svg/180px-Pok%C3%A9mon_Ice_Type_Icon.svg.png",
         color: "#98D8D8",
     },
     fighting: {

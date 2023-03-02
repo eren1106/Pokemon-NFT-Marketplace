@@ -6,6 +6,7 @@ import TYPES from '../../constant/types';
 import styles from './PokemonCard.module.scss';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import { useAppSelector } from '../../hooks';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
 interface IPokemonCardProps {
   pokemon: Pokemon,
@@ -66,8 +67,11 @@ const PokemonCard: React.FC<IPokemonCardProps> = ({
         <p className={styles.level}>Lv. {pokemon.level}</p>
       </div>
       <div className={styles.lower}>
-        <p className={styles.price}>{pokemon.forSale ? `$${pokemon.price}` : 'Unavailable'}</p>
-        <p className={styles.owner}>{ownerName}</p>
+        <div className={styles.lowerLeft}>
+          <p className={styles.price}>{pokemon.forSale ? `$${pokemon.price}` : 'Unavailable'}</p>
+          <p className={styles.owner}>{ownerName}</p>
+        </div>
+        {currentUser?.favourites.includes(pokemon._id!) && <FavoriteIcon className={styles.favourite} />}
       </div>
     </div>
   );

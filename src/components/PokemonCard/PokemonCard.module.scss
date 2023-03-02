@@ -67,16 +67,26 @@
 
     .lower {
         display: flex;
-        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
         padding: 10px 15px;
 
-        .price {
-            font-weight: bolder;
-            font-size: 20px;
+        .lowerLeft {
+            display: flex;
+            flex-direction: column;
+
+            .price {
+                font-weight: bolder;
+                font-size: 20px;
+            }
+    
+            .owner {
+                color: var(--grey-text);
+            }
         }
 
-        .owner {
-            color: var(--grey-text);
+        .favourite {
+            fill: var(--red);
         }
     }
 }

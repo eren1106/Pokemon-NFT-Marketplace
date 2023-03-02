@@ -84,13 +84,14 @@ export const currentUserSlice = createSlice({
       .addCase(loginUser.fulfilled, (state, action) => {
         state.loading = false;
 
-        const { _id, name, email, pokemons, coins } = action.payload;
+        const { _id, name, email, pokemons, coins, favourites } = action.payload;
         const currentUser: User = {
-          _id: _id,
-          name: name,
-          email: email,
-          pokemons: pokemons,
-          coins: coins
+          _id,
+          name,
+          email,
+          pokemons,
+          coins,
+          favourites,
         }
         state.currentUser = currentUser;
         localStorage.setItem('currentUser', JSON.stringify(currentUser));
@@ -122,7 +123,6 @@ export const currentUserSlice = createSlice({
         state.loading = false;
         state.currentUser = action.payload;
         localStorage.setItem('currentUser', JSON.stringify(action.payload));
-        console.log("SUP");
       })
       .addCase(refreshUser.rejected, (state, action) => {
         state.loading = false;

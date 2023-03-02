@@ -15,7 +15,24 @@ input::-webkit-inner-spin-button {
         flex-direction: column;
         gap: 30px;
 
-        .name {}
+        .leftTop {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+
+            .favourite {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+
+                .icon {
+                    fill: var(--red);
+                    font-size: 35px;
+                }
+            }
+        }
 
         .pokemonImg {
             width: 80%;
