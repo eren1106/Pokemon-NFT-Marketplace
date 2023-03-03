@@ -75,7 +75,11 @@ const Detail: React.FC<IDetailProps> = ({ backRoute }) => {
   const handleTradePokemon = async () => {
     if (currentUser && currentUser.pokemons.includes(pokemon?._id)) {
       if (pokemon?.forSale) { // cancel
-        // TODO: Cancel sell
+        dispatch(sellPokemon({
+          pokemonId: id!,
+        })).unwrap().then(() => {
+          window.location.reload();
+        });
       }
       else { // sell
         const price = priceRef.current?.value;

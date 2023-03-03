@@ -22,7 +22,7 @@ interface BuyInfo {
 }
 interface SellInfo {
   pokemonId: string,
-  price: number
+  price?: number
 }
 // Define the initial state using that type
 const initialState: PokemonState = {
