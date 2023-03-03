@@ -12,6 +12,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import styles from './Detail.module.scss';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import CustomModal from '../../components/CustomModal';
 
 export interface IDetailProps {
   backRoute: string,
@@ -28,6 +29,13 @@ const Detail: React.FC<IDetailProps> = ({ backRoute }) => {
   const priceRef = useRef<HTMLInputElement | null>(null);
 
   const [ownerName, setOwnerName] = useState<string>("-");
+
+  const [showModal, setShowModal] = useState<boolean>(false);
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+    window.location.reload();
+  }
 
   const currentUser = useAppSelector((state: any) => state.auth.currentUser);
 
@@ -80,7 +88,7 @@ const Detail: React.FC<IDetailProps> = ({ backRoute }) => {
           price: parseInt(price!),
         })).unwrap().then(() => {
           window.location.reload();
-        });;
+        });
       }
     }
     else { // buy
@@ -98,7 +106,8 @@ const Detail: React.FC<IDetailProps> = ({ backRoute }) => {
         sellerId: pokemon?.ownerID!,
         price: pokemon?.price,
       })).unwrap().then(() => {
-        window.location.reload();
+        setShowModal(true);
+        // window.location.reload();
       });
     }
   }
@@ -275,6 +284,16 @@ const Detail: React.FC<IDetailProps> = ({ backRoute }) => {
           }
         />
       </div>
+      <CustomModal
+        open={showModal}
+        title={error ? "Fail" : "Buy successfully!"}
+        onClose={handleCloseModal}
+        description={error ? error : `Added ${pokemon?.name} in your collection`}
+        children={
+          !error &&
+          <img className={styles.modalImg} src={pokemon?.imgUrl} alt="pokemon" />
+        }
+      />
     </>
   }
 

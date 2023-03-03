@@ -156,6 +156,11 @@ input::-webkit-inner-spin-button {
 
 }
 
+.modalImg {
+    height: auto;
+    width: 60%;
+}
+
 @keyframes breath-animation {
     0% {
         transform: scaleY(1) scaleX(1) rotate(0deg);
