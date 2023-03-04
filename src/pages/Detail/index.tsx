@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import ConditionalContent from '../../components/ConditionalContent';
 import PageWrapper from '../../components/PageWrapper';
 import TYPES from '../../constant/types';
-import { refreshUser } from '../../features/authSlice';
+import { refreshUser, toggleFavourite } from '../../features/authSlice';
 import { buyPokemon, getPokemonById, sellPokemon } from '../../features/pokemonSlice';
 import { setBackRoute } from '../../features/topbarSlice';
 import { useAppDispatch, useAppSelector } from '../../hooks';
@@ -13,6 +13,7 @@ import styles from './Detail.module.scss';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import CustomModal from '../../components/CustomModal';
+import toast, { Toaster } from 'react-hot-toast';
 
 export interface IDetailProps {
   backRoute: string,
@@ -111,9 +112,18 @@ const Detail: React.FC<IDetailProps> = ({ backRoute }) => {
         price: pokemon?.price,
       })).unwrap().then(() => {
         setShowModal(true);
-        // window.location.reload();
       });
     }
+  }
+
+  const handleToggleFavourite = () => {
+    const isFavourite = currentUser.favourites.includes(pokemon?._id);
+    const promise = dispatch(toggleFavourite(pokemon?._id!));
+    toast.promise(promise, {
+      loading: 'Loading',
+      success: isFavourite ? 'Removed from favourites' : 'Added to favourites',
+      error: 'Error when fetching',
+    });
   }
 
   const convertPokedexNum = (num: number | undefined): string => {
@@ -138,8 +148,15 @@ const Detail: React.FC<IDetailProps> = ({ backRoute }) => {
       <div className={styles.left}>
         <div className={styles.leftTop}>
           <h1>{pokemon?.name}</h1>
-          <div className={styles.favourite}>
-            <FavoriteBorderIcon className={styles.icon} />
+          <div
+            className={styles.favourite}
+            onClick={handleToggleFavourite}
+          >
+            <ConditionalContent
+              condition={currentUser.favourites.includes(pokemon?._id)}
+              first={<FavoriteIcon className={styles.icon} />}
+              second={<FavoriteBorderIcon className={styles.icon} />}
+            />
           </div>
         </div>
         <img className={styles.pokemonImg} src={pokemon?.imgUrl} alt="pokemon" />
@@ -298,6 +315,7 @@ const Detail: React.FC<IDetailProps> = ({ backRoute }) => {
           <img className={styles.modalImg} src={pokemon?.imgUrl} alt="pokemon" />
         }
       />
+      <Toaster />
     </>
   }
 
