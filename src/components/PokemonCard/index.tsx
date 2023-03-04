@@ -68,7 +68,7 @@ const PokemonCard: React.FC<IPokemonCardProps> = ({
       </div>
       <div className={styles.lower}>
         <div className={styles.lowerLeft}>
-          <p className={styles.price}>{pokemon.forSale ? `$${pokemon.price}` : 'Unavailable'}</p>
+          <p className={styles.price}>{pokemon.forSale ? `$${pokemon.price}` : 'Not For Sale'}</p>
           <p className={styles.owner}>{ownerName}</p>
         </div>
         {currentUser?.favourites.includes(pokemon._id!) && <FavoriteIcon className={styles.favourite} />}

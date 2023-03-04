@@ -2,14 +2,14 @@ import { CircularProgress } from '@mui/material';
 import React, { useEffect } from 'react';
 import PageWrapper from '../../components/PageWrapper';
 import PokemonCard from '../../components/PokemonCard';
-import { getPokemonsByUserId } from '../../features/pokemonSlice';
+import { getPokemonsByFavourites, getPokemonsByUserId } from '../../features/pokemonSlice';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import styles from './Collection.module.scss';
+import styles from './Favourites.module.scss';
 
-export interface ICollectionProps {
+export interface IFavouritesProps {
 }
 
-export default function Collection(props: ICollectionProps) {
+export default function Favourites(props: IFavouritesProps) {
   const dispatch = useAppDispatch();
   const pokemons = useAppSelector((state) => state.pokemon.pokemons);
   const loading = useAppSelector((state) => state.pokemon.loading);
@@ -17,7 +17,7 @@ export default function Collection(props: ICollectionProps) {
   const currentUser = useAppSelector((state) => state.auth.currentUser);
 
   useEffect(() => {
-    dispatch(getPokemonsByUserId(currentUser?._id!))
+    dispatch(getPokemonsByFavourites(currentUser?._id!))
   }, [dispatch, currentUser?._id]);
 
   let content;
@@ -41,8 +41,8 @@ export default function Collection(props: ICollectionProps) {
     </div>
 
   return (
-    <PageWrapper title="Collection">
-      <div className={styles.collection}>
+    <PageWrapper title="Favourites">
+      <div className={styles.favourites}>
         {content}
       </div>
     </PageWrapper>

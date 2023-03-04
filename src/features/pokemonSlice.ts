@@ -49,6 +49,11 @@ export const getPokemonsByUserId = createAsyncThunk('pokemon/getPokemonsByUserId
   return res.data;
 });
 
+export const getPokemonsByFavourites = createAsyncThunk('pokemon/getPokemonsByFavourites', async (userId: string) => {
+  const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/pokemons/user/${userId}/favourites`);
+  return res.data;
+});
+
 export const createPokemon = createAsyncThunk('pokemon/createPokemon', async (newPokemon: Pokemon) => {
   const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/pokemons/create`, newPokemon);
   return res.data;
@@ -80,7 +85,6 @@ export const currentUserSlice = createSlice({
       .addCase(getAllPokemons.fulfilled, (state, action) => {
         state.loading = false;
         const pokemons = action.payload;
-        pokemons.sort((a: Pokemon, b: Pokemon) => a.no - b.no);
         pokemons.sort((a: Pokemon, b: Pokemon) => {
           if(a.forSale === b.forSale) return a.no - b.no;
           if(a.forSale) return -1;
@@ -117,15 +121,37 @@ export const currentUserSlice = createSlice({
       .addCase(getPokemonsByUserId.fulfilled, (state, action) => {
         state.loading = false;
         const pokemons = action.payload;
+        // pokemons.sort((a: Pokemon, b: Pokemon) => {
+        //   if(a.forSale === b.forSale) return a.no - b.no;
+        //   if(a.forSale) return -1;
+        //   return 1;
+        // })
         pokemons.sort((a: Pokemon, b: Pokemon) => a.no - b.no);
-        pokemons.sort((a: Pokemon, b: Pokemon) => {
-          if(a.forSale === b.forSale) return a.no - b.no;
-          if(a.forSale) return -1;
-          return 1;
-        })
         state.pokemons = pokemons;
       })
       .addCase(getPokemonsByUserId.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      })
+
+      // GET POKEMON BY FAVOURITES
+      .addCase(getPokemonsByFavourites.pending, (state, action) => {
+        state.loading = true;
+        state.error = null;
+        state.currentPokemon = null;
+      })
+      .addCase(getPokemonsByFavourites.fulfilled, (state, action) => {
+        state.loading = false;
+        const pokemons = action.payload;
+        // pokemons.sort((a: Pokemon, b: Pokemon) => {
+        //   if(a.forSale === b.forSale) return a.no - b.no;
+        //   if(a.forSale) return -1;
+        //   return 1;
+        // })
+        pokemons.sort((a: Pokemon, b: Pokemon) => a.no - b.no);
+        state.pokemons = pokemons;
+      })
+      .addCase(getPokemonsByFavourites.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       })

@@ -264,7 +264,7 @@ const Detail: React.FC<IDetailProps> = ({ backRoute }) => {
               </div>
             }
             second={
-              <p className={styles.price}>{pokemon?.forSale ? `$${pokemon?.price}` : "Unavailable"}</p>
+              <p className={styles.price}>{pokemon?.forSale ? `$${pokemon?.price}` : "Not For Sale"}</p>
             }
           />
           <ConditionalContent

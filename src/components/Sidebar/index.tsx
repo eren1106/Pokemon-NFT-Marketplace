@@ -12,6 +12,7 @@ import LoginIcon from '@mui/icons-material/Login';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { logoutUser } from '../../features/authSlice';
 import ConditionalContent from '../ConditionalContent';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
 export interface ISidebarProps {
   onToggle: () => void;
@@ -39,6 +40,11 @@ const menuItems: MenuItem[] = [
     path: "/collection",
     name: "Collection",
     icon: <CollectionsBookmarkIcon className={styles.icon} />
+  },
+  {
+    path: "/favourites",
+    name: "Favourites",
+    icon: <FavoriteIcon className={styles.icon} />
   },
   {
     path: "/profile",

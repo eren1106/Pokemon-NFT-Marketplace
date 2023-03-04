@@ -7,6 +7,7 @@ import Detail from './pages/Detail';
 import Profile from './pages/Profile';
 import Register from './pages/Register';
 import Login from './pages/Login';
+import Favourites from './pages/Favourites';
 
 function App() {
   return (
@@ -18,6 +19,8 @@ function App() {
           <Route path="/shop/:id" element={<Detail backRoute="/shop"/>} />
           <Route path="/collection" element={<Collection />} />
           <Route path="/collection/:id" element={<Detail backRoute="/collection"/>} />
+          <Route path="/favourites" element={<Favourites />} />
+          <Route path="/favourites/:id" element={<Detail backRoute="/favourites"/>} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
