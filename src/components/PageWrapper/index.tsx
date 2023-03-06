@@ -43,7 +43,9 @@ const PageWrapper: React.FunctionComponent<IPageWrapperProps> = ({ children, tit
                     />
                 </div>
                 <Topbar />
-                {children}
+                <div className={styles.content}>
+                    {children}
+                </div>
             </div>
         </div>
     );

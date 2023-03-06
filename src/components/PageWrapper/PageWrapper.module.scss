@@ -7,7 +7,6 @@
         position: relative;
         margin-left: var(--sidebar-close-width);
         transition: all 0.3s ease-in-out;
-        margin-top: var(--topbar-height);
 
         .topSidebar {
             display: none;
@@ -28,6 +27,10 @@
                 margin: auto;
             }
         }
+
+        .content {
+            margin-top: var(--topbar-height);
+        }
     }
 
     .right.shrink{
@@ -39,10 +42,13 @@
     .wrapper {
         .right {
             margin-left: 0;
-            margin-top: calc(var(--topbar-height) + var(--topsidebar-height));
 
             .topSidebar {
                 display: flex;
+            }
+
+            .content {
+                margin-top: calc(var(--topbar-height) + var(--topsidebar-height));
             }
         }
         .right.shrink{
