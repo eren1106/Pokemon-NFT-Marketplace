@@ -99,12 +99,12 @@ export const TYPES: Types = {
     },
     dragon: {
         name: "Dragon",
-        imageUrl: "https://archives.bulbagarden.net/media/upload/7/7e/Dragon_icon_SwSh.png",
+        imageUrl: "https://archives.bulbagarden.net/media/upload/7/70/Dragon_icon_SwSh.png",
         color: "#7038F8",
     },
     dark: {
         name: "Dark",
-        imageUrl: "https://archives.bulbagarden.net/media/upload/7/79/Dark_icon_SwSh.png",
+        imageUrl: "https://archives.bulbagarden.net/media/upload/d/d5/Dark_icon_SwSh.png",
         color: "#705848",
     },
     steel: {

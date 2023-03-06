@@ -73,7 +73,7 @@ const PokemonCard: React.FC<IPokemonCardProps> = ({
         </div>
         {currentUser?.favourites.includes(pokemon._id!) && <FavoriteIcon className={styles.favourite} />}
       </div>
-    </div>
+  </div>
   );
 };
 
