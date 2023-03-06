@@ -7,13 +7,17 @@
         position: relative;
         margin-left: var(--sidebar-close-width);
         transition: all 0.3s ease-in-out;
+        margin-top: var(--topbar-height);
 
         .topSidebar {
             display: none;
             background-color: var(--sidebar-dark);
-            height: 60px;
+            height: var(--topsidebar-height);
             padding: 10px;
             align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
 
             .burgerMenu{
                 flex: 0 0 auto;
@@ -35,6 +39,7 @@
     .wrapper {
         .right {
             margin-left: 0;
+            margin-top: calc(var(--topbar-height) + var(--topsidebar-height));
 
             .topSidebar {
                 display: flex;
@@ -49,6 +54,7 @@
             position: absolute;
             height: 100%;
             width: 100%;
+            z-index: 99;
         }
     }
 }

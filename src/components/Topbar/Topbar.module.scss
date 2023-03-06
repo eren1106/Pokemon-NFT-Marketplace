@@ -1,7 +1,12 @@
 .topbar {
-    height: 65px;
+    height: var(--topbar-height);
     border-bottom: 1px solid var(--topbar-stroke);
     padding: 15px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    background-color: var(--background-dark);
+    z-index: 9;
 
     .left {
         display: flex;
@@ -17,5 +22,11 @@
         .title{
             font-size: 25px;
         }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .topbar {
+        top: var(--topsidebar-height);
     }
 }

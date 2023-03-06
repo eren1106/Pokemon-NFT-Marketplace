@@ -247,11 +247,11 @@ const Detail: React.FC<IDetailProps> = ({ backRoute }) => {
             condition={currentUser && currentUser.pokemons.includes(pokemon?._id)}
             first={
               <div className={styles.saleForDiv}>
-                <p className={styles.price}>Sale for $</p>
+                <p className={styles.price}>Sell for</p>
                 <ConditionalContent
                   condition={pokemon?.forSale}
                   first={
-                    <p className={styles.price}>{pokemon?.price}</p>
+                    <p className={styles.price}>{`$${pokemon?.price}`}</p>
                   }
                   second={
                     <input
