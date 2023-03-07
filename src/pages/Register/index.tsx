@@ -1,6 +1,5 @@
 import { CircularProgress } from '@mui/material';
-import axios from 'axios';
-import React, { FormEvent, useEffect, useRef } from 'react';
+import React, { FormEvent, useEffect } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { clearError, registerUser, setAuthError } from '../../features/authSlice';
 import { useAppDispatch, useAppSelector } from '../../hooks';

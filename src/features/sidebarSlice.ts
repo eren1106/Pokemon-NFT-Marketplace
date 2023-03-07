@@ -4,9 +4,11 @@ interface SidebarState {
   isClosed: boolean
 }
 
+var screenWidth = window.innerWidth;
+
 // Define the initial state using that type
 const initialState: SidebarState = {
-  isClosed: false,
+  isClosed: screenWidth < 768,
 }
 
 export const sidebarSlice = createSlice({

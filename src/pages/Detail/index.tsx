@@ -162,86 +162,76 @@ const Detail: React.FC<IDetailProps> = ({ backRoute }) => {
         <img className={styles.pokemonImg} src={pokemon?.imgUrl} alt="pokemon" />
       </div>
       <div className={styles.right}>
-        <Row
-          children={[
-            <Info
-              label="Type"
-              element={
-                <div className={styles.types}>
-                  {
-                    pokemon?.types.map((type) =>
-                      <div
-                        key={type}
-                        className={styles.typeDiv}
-                      >
-                        <img
-                          className={styles.typeImg}
-                          src={TYPES[type.toLowerCase()].imageUrl}
-                          alt="pokemon"
-                        />
-                        <p className={styles.typeText}>{type}</p>
-                      </div>
-                    )
-                  }
-                </div>
-              }
-            />,
-            <Info
-              label="Level"
-              text={pokemon?.level}
-            />
-          ]}
-        />
-        <Row
-          children={[
-            <Info
-              label="Pokedex Number"
-              text={convertPokedexNum(pokemon?.no)}
-            />,
-            // <Info
-            //   label="Serial Number"
-            //   text={pokemon.index}
-            // />
-          ]}
-        />
+        <Row>
+          <Info
+            label="Type"
+            element={
+              <div className={styles.types}>
+                {
+                  pokemon?.types.map((type) =>
+                    <div
+                      key={type}
+                      className={styles.typeDiv}
+                    >
+                      <img
+                        className={styles.typeImg}
+                        src={TYPES[type.toLowerCase()].imageUrl}
+                        alt="pokemon"
+                      />
+                      <p className={styles.typeText}>{type}</p>
+                    </div>
+                  )
+                }
+              </div>
+            }
+          />
+          <Info
+            label="Level"
+            text={pokemon?.level}
+          />
+        </Row>
+        <Row>
+          <Info
+            label="Pokedex Number"
+            text={convertPokedexNum(pokemon?.no)}
+          />
+          {/* <Info
+               label="Serial Number"
+               text={pokemon.index}
+             /> */}
+        </Row>
         <div className={styles.divider} />
-        <Row
-          children={[
-            <Info
-              label="Attack"
-              text={pokemon?.atk}
-            />,
-            <Info
-              label="Defense"
-              text={pokemon?.def}
-            />
-          ]}
-        />
-        <Row
-          children={[
-            <Info
-              label="HP"
-              text={pokemon?.hp}
-            />,
-            <Info
-              label="Speed"
-              text={pokemon?.speed}
-            />
-          ]}
-        />
+        <Row>
+          <Info
+            label="Attack"
+            text={pokemon?.atk}
+          />
+          <Info
+            label="Defense"
+            text={pokemon?.def}
+          />
+        </Row>
+        <Row>
+          <Info
+            label="HP"
+            text={pokemon?.hp}
+          />
+          <Info
+            label="Speed"
+            text={pokemon?.speed}
+          />
+        </Row>
         <div className={styles.divider} />
-        <Row
-          children={[
-            <Info
-              label="Owner"
-              text={ownerName}
-            />,
-            <Info
-              label="Previous Price"
-              text={pokemon?.prevPrice ?? "-"}
-            />
-          ]}
-        />
+        <Row>
+          <Info
+            label="Owner"
+            text={ownerName}
+          />
+          <Info
+            label="Previous Price"
+            text={pokemon?.prevPrice ?? "-"}
+          />
+        </Row>
         <div className={styles.btmSection}>
           <ConditionalContent
             condition={currentUser && currentUser.pokemons.includes(pokemon?._id)}
@@ -307,7 +297,7 @@ const Detail: React.FC<IDetailProps> = ({ backRoute }) => {
       </div>
       <CustomModal
         open={showModal}
-        title={error ? "Fail" : "Buy successfully!"}
+        title={error ? "Fail" : "Gotcha!"}
         onClose={handleCloseModal}
         description={error ? error : `Added ${pokemon?.name} in your collection`}
         children={
@@ -331,7 +321,7 @@ const Detail: React.FC<IDetailProps> = ({ backRoute }) => {
 }
 
 interface RowProps {
-  children: Array<JSX.Element>;
+  children: React.ReactNode;
 }
 
 const Row: React.FC<RowProps> = ({
@@ -339,7 +329,7 @@ const Row: React.FC<RowProps> = ({
 }) => {
   return (
     <div className={styles.row}>
-      {children.map((child) => child)}
+      {children}
     </div>
   );
 };

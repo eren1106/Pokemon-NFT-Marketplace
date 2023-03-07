@@ -27,19 +27,19 @@ export default function Collection(props: ICollectionProps) {
     left: '50%',
     transform: 'translate(-50%, -50%)',
   }} />
-  else if (error) content = <p>{error}</p>
+  else if (error) content = <p className={styles.errorText}>{error}</p>
+  else if(pokemons.length === 0) content = <p className={styles.errorText}>No pokemons yet. Go buy some!</p>
   else content =
-    <div className={styles.cardsWrapper}>
-      {
-        pokemons.map((pokemon) =>
-          <PokemonCard
-            key={pokemon._id}
-            pokemon={pokemon}
-          />
-        )
-      }
-    </div>
-
+  <div className={styles.cardsWrapper}>
+    {
+      pokemons.map((pokemon) =>
+        <PokemonCard
+          key={pokemon._id}
+          pokemon={pokemon}
+        />
+      )
+    }
+  </div>
   return (
     <PageWrapper title="Collection">
       <div className={styles.collection}>

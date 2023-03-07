@@ -9,6 +9,8 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import styles from './Shop.module.scss';
 import ImportExportIcon from '@mui/icons-material/ImportExport';
 import { sortStandards } from '../../constant/sortStandards';
+import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
+import ConditionalContent from '../../components/ConditionalContent';
 
 export interface IShopProps {
 }
@@ -18,6 +20,8 @@ export default function Shop(props: IShopProps) {
   const pokemons = useAppSelector((state) => state.pokemon.pokemons);
   const loading = useAppSelector((state) => state.pokemon.loading);
   const error = useAppSelector((state) => state.pokemon.error);
+  const currentUser = useAppSelector((state) => state.auth.currentUser);
+
   const [displayedPokemons, setDisplayedPokemons] = useState<Array<Pokemon>>([]);
   useEffect(() => {
     const fetchData = async () => {
@@ -94,10 +98,19 @@ export default function Shop(props: IShopProps) {
   else if (error) content = <p>{error}</p>
   else content =
     <>
-      <SearchAndFilter
-        setSearchText={setSearchText}
-        setFilterTypesToParent={setFilterTypes}
-      />
+      <div className={styles.topSection}>
+        <SearchAndFilter
+          setSearchText={setSearchText}
+          setFilterTypesToParent={setFilterTypes}
+        />
+        <div className={styles.haveCoin}>
+          Have:
+          <div className={styles.coins}>
+            {currentUser?.coins}
+            <MonetizationOnIcon className={styles.coinIcon} />
+          </div>
+        </div>
+      </div>
       <div className={styles.numberAndSort}>
         <h2>{`${displayedPokemons.length} Pokemons`}</h2>
         <div className={styles.sortBtn} onClick={handleClick}>
@@ -105,12 +118,20 @@ export default function Shop(props: IShopProps) {
           <p>{sortStandard}</p>
         </div>
       </div>
-      <div className={styles.cardsWrapper}>
-        {displayedPokemons.map((pokemon) => <PokemonCard
-          key={pokemon._id}
-          pokemon={pokemon} />
-        )}
-      </div>
+      <ConditionalContent
+        condition={displayedPokemons.length > 0}
+        first={
+          <div className={styles.cardsWrapper}>
+            {
+              displayedPokemons.map((pokemon) => <PokemonCard
+                key={pokemon._id}
+                pokemon={pokemon} />
+              )
+            }
+          </div>
+        }
+        second={<p className={styles.emptyText}>No available pokemon</p>}
+      />
       <Popover
         id={id}
         open={open}

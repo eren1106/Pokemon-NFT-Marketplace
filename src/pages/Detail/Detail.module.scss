@@ -109,7 +109,7 @@ input::-webkit-inner-spin-button {
             .saleForDiv {
                 display: flex;
                 align-items: center;
-                gap: 5px;
+                gap: 8px;
 
                 .price {
                     font-weight: bolder;
@@ -119,7 +119,7 @@ input::-webkit-inner-spin-button {
                 .priceInput {
                     font-weight: bolder;
                     background-color: var(--button-grey-outline);
-                    padding: 0 5px;
+                    padding: 10px;
                     font-size: 18px;
                     width: 100px;
                     border: none;

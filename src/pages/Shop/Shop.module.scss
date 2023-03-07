@@ -4,8 +4,31 @@
     flex-direction: column;
     gap: 30px;
 
+    .topSection {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 30px;
+        justify-content: space-between;
+
+        .haveCoin {
+            display: flex;
+            font-size: 18px;
+            font-weight: 600;
+            gap: 5px;
+
+            .coins {
+                display: flex;
+
+                .coinIcon {
+                    fill: var(--coin);
+                }
+            }
+        }
+    }
+
     .numberAndSort {
-        display : flex;
+        display: flex;
         align-items: center;
         justify-content: space-between;
 
@@ -30,25 +53,32 @@
         gap: 20px;
         justify-content: center;
     }
+
+    .emptyText {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
 }
 
 .popover {
     .filterPopover {
-      padding: 6px;
-      background-color: var(--grey-card);
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      width: 140px;
+        padding: 6px;
+        background-color: var(--grey-card);
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 140px;
 
-      .sortText {
-        cursor: pointer;
-        padding: 10px;
-        border-radius: 5px;
+        .sortText {
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 5px;
 
-        &:hover {
-            background-color: var(--filter-type-grey);
+            &:hover {
+                background-color: var(--filter-type-grey);
+            }
         }
-      }
     }
-  }
+}

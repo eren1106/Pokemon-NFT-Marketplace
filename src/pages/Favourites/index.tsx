@@ -28,6 +28,7 @@ export default function Favourites(props: IFavouritesProps) {
     transform: 'translate(-50%, -50%)',
   }} />
   else if (error) content = <p>{error}</p>
+  else if(pokemons.length === 0) content = <p className={styles.errorText}>You did not add any pokemon to favourites yet!</p>
   else content =
     <div className={styles.cardsWrapper}>
       {
