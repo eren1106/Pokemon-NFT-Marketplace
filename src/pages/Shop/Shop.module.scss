@@ -4,6 +4,26 @@
     flex-direction: column;
     gap: 30px;
 
+    .numberAndSort {
+        display : flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .sortBtn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 10px;
+
+            &:hover {
+                background-color: var(--filter-type-grey);
+            }
+        }
+    }
+
     .cardsWrapper {
         display: flex;
         flex-wrap: wrap;
@@ -11,3 +31,24 @@
         justify-content: center;
     }
 }
+
+.popover {
+    .filterPopover {
+      padding: 6px;
+      background-color: var(--grey-card);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 140px;
+
+      .sortText {
+        cursor: pointer;
+        padding: 10px;
+        border-radius: 5px;
+
+        &:hover {
+            background-color: var(--filter-type-grey);
+        }
+      }
+    }
+  }
