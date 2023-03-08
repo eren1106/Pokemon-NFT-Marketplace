@@ -32,7 +32,6 @@ const Detail: React.FC<IDetailProps> = ({ backRoute }) => {
   const [ownerName, setOwnerName] = useState<string>("-");
 
   const [showModal, setShowModal] = useState<boolean>(false);
-
   const handleCloseModal = () => {
     setShowModal(false);
     window.location.reload();
@@ -304,6 +303,8 @@ const Detail: React.FC<IDetailProps> = ({ backRoute }) => {
           !error &&
           <img className={styles.modalImg} src={pokemon?.imgUrl} alt="pokemon" />
         }
+        width={400}
+        height={320}
       />
       <Toaster />
     </>

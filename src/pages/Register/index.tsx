@@ -1,9 +1,11 @@
 import { CircularProgress } from '@mui/material';
-import React, { FormEvent, useEffect } from 'react';
+import React, { FormEvent, useEffect, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
+import CustomModal from '../../components/CustomModal';
 import { clearError, registerUser, setAuthError } from '../../features/authSlice';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import styles from './Register.module.scss';
+import toast, { Toaster } from 'react-hot-toast';
 
 interface IRegisterProps {
 }
@@ -33,12 +35,18 @@ const Register: React.FunctionComponent<IRegisterProps> = (props) => {
     }
     dispatch(registerUser({ name, email, password })).unwrap()
       .then(() => {
-        navigate("/login");
+        setShowModal(true);
       })
-      .catch((err) => {
-        // TODO: Show "invalid password or email" if login fail
-        console.error('Login failed:', err);
-      })
+      // .catch((err) => {
+      //   toast.error("Invalid email");
+      // })
+  }
+
+  // POP UP MODAL
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const handleCloseModal = () => {
+    setShowModal(false);
+    if(!error) navigate("/login");
   }
 
   return (
@@ -88,6 +96,13 @@ const Register: React.FunctionComponent<IRegisterProps> = (props) => {
           Already have an account? Login here
         </NavLink>
       </form>
+      <CustomModal
+        open={showModal}
+        title={error ? "Fail" : "Success"}
+        onClose={handleCloseModal}
+        description={error ? error : "Registered Successfully"}
+      />
+      {/* <Toaster /> */}
     </div>
   );
 };
