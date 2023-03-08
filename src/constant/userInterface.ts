@@ -4,5 +4,6 @@ export interface User {
     email: string,
     pokemons: Array<string>,
     coins: number,
-    favourites: Array<string>, 
+    favourites: Array<string>,
+    bio: string,
 }

@@ -65,7 +65,7 @@ export const toggleFavourite = createAsyncThunk('auth/toggleFavourite', async (p
   return res.data;
 });
 
-export const currentUserSlice = createSlice({
+export const authSlice = createSlice({
   name: 'auth',
   // `createSlice` will infer the state type from the `initialState` argument
   initialState,
@@ -92,7 +92,7 @@ export const currentUserSlice = createSlice({
       .addCase(loginUser.fulfilled, (state, action) => {
         state.loading = false;
 
-        const { _id, name, email, pokemons, coins, favourites } = action.payload;
+        const { _id, name, email, pokemons, coins, favourites, bio } = action.payload;
         const currentUser: User = {
           _id,
           name,
@@ -100,6 +100,7 @@ export const currentUserSlice = createSlice({
           pokemons,
           coins,
           favourites,
+          bio,
         }
         state.currentUser = currentUser;
         localStorage.setItem('currentUser', JSON.stringify(currentUser));
@@ -154,6 +155,6 @@ export const currentUserSlice = createSlice({
   }
 })
 
-export const { logoutUser, setAuthError, clearError } = currentUserSlice.actions
+export const { logoutUser, setAuthError, clearError } = authSlice.actions
 
-export default currentUserSlice.reducer
+export default authSlice.reducer

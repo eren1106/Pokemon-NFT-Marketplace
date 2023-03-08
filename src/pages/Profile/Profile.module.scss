@@ -1,0 +1,72 @@
+.wrapper {
+  padding: 30px;
+
+  .panel {
+    background-color: var(--grey-card);
+    border-radius: 15px;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    min-height: 82vh;
+
+    .infoSection {
+      display: flex;
+      gap: 80px;
+
+      .profilePic {
+        border-radius: 50%;
+        height: 160px;
+        width : 160px;
+        object-fit: cover;
+      }
+
+      .infoSectionRight {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        width: 100%;
+        font-size: 18px;
+        gap: 10px;
+
+        .info {
+          display: flex;
+          width: 100%;
+          gap: 20px;
+          flex-wrap: wrap;
+
+          .label {
+            font-weight: bold;
+            width: 80px;
+          }
+  
+          .content {
+            
+          }
+        }
+      }
+
+      .editIcon {
+        cursor: pointer;
+      }
+    }
+
+    .pokemonSection {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      .pokemonsDiv {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+
+        .pokemonImg {
+          width: 60px;
+          height: 60px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

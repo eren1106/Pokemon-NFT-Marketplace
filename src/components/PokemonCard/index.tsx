@@ -64,7 +64,7 @@ const PokemonCard: React.FC<IPokemonCardProps> = ({
           {currentUser?._id === pokemon.ownerID && <ShoppingBagIcon />}
         </div>
         <img className={styles.pokemonImage} src={pokemon.imgUrl} alt="pokemon" />
-        <p className={styles.level}>Lv. {pokemon.level}</p>
+        {/* <p className={styles.level}>Lv. {pokemon.level}</p> */}
       </div>
       <div className={styles.lower}>
         <div className={styles.lowerLeft}>
