@@ -17,7 +17,7 @@
       .profilePic {
         border-radius: 50%;
         height: 160px;
-        width : 160px;
+        width: 160px;
         object-fit: cover;
       }
 
@@ -33,21 +33,65 @@
           display: flex;
           width: 100%;
           gap: 20px;
-          flex-wrap: wrap;
+          // flex-wrap: wrap;
 
           .label {
             font-weight: bold;
             width: 80px;
           }
-  
-          .content {
-            
+
+          .textfield {
+            background-color: var(--button-grey-outline);
+            padding: 5px;
+            border: none;
+            outline: none;
+            width: 100%;
+            resize: none;
+            font-family: inherit;
+            font-size: inherit;
+          }
+
+          .content {}
+        }
+
+        .btnGroup {
+          display: flex;
+          gap: 10px;
+          justify-content: flex-end;
+
+          .btn {
+            width: 75px;
+            padding: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s all ease-in-out;
+
+            &:hover {
+              transform: scale(1.03);
+            }
+          }
+
+          .cancelBtn {
+            background-color: var(--grey-text);
+          }
+
+          .saveBtn {
+            background-color: var(--orange);
           }
         }
       }
 
-      .editIcon {
+      .editBtn {
         cursor: pointer;
+        height: fit-content;
+        padding: 10px;
+        border-radius: 10px;
+
+        &:hover {
+          background-color: var(--filter-type-grey);
+        }
       }
     }
 

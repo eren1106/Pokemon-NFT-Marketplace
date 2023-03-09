@@ -19,6 +19,16 @@ interface RegisterCredentials {
   password: string,
 }
 
+interface updateDTO {
+  name?: string,
+  bio?: string,
+  imgUrl?: string,
+}
+interface updateCredentials {
+  userId: string,
+  object: updateDTO
+}
+
 // get user from local storage
 let storedUser: User | null = null;
 const getStoredUser = localStorage.getItem('currentUser');
@@ -62,6 +72,11 @@ export const toggleFavourite = createAsyncThunk('auth/toggleFavourite', async (p
   const id = storedUser._id;
   const res = await axios.put(`${process.env.REACT_APP_SERVER_URL}/users/${id}/favourite`, { pokemonId });
   console.log("FAVOURITE", res.data);
+  return res.data;
+});
+
+export const updateUser = createAsyncThunk('auth/updateUser', async ({userId, object}: updateCredentials) => {
+  const res = await axios.put(`${process.env.REACT_APP_SERVER_URL}/users/${userId}`, object);
   return res.data;
 });
 
@@ -149,6 +164,21 @@ export const authSlice = createSlice({
         localStorage.setItem('currentUser', JSON.stringify(action.payload));
       })
       .addCase(toggleFavourite.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      })
+
+      // TOGGLE FAVOURITE
+      .addCase(updateUser.pending, (state, action) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(updateUser.fulfilled, (state, action) => {
+        state.loading = false;
+        state.currentUser = action.payload;
+        localStorage.setItem('currentUser', JSON.stringify(action.payload));
+      })
+      .addCase(updateUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       })

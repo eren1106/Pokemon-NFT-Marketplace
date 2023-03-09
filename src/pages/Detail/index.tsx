@@ -1,7 +1,7 @@
 import { CircularProgress } from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 import ConditionalContent from '../../components/ConditionalContent';
 import PageWrapper from '../../components/PageWrapper';
 import TYPES from '../../constant/types';
@@ -224,7 +224,14 @@ const Detail: React.FC<IDetailProps> = ({ backRoute }) => {
         <Row>
           <Info
             label="Owner"
-            text={ownerName}
+            element={
+              <NavLink
+                to={`/user/${pokemon?.ownerID}`}
+                style={{ fontWeight: 'bold' }}
+              >
+                {`${ownerName}`}
+              </NavLink>
+            }
           />
           <Info
             label="Previous Price"
