@@ -105,13 +105,13 @@ export default function Shop(props: IShopProps) {
           setSearchText={setSearchText}
           setFilterTypesToParent={setFilterTypes}
         />
-        <div className={styles.haveCoin}>
+        {/* <div className={styles.haveCoin}>
           Have:
           <div className={styles.coins}>
             {currentUser?.coins}
             <MonetizationOnIcon className={styles.coinIcon} />
           </div>
-        </div>
+        </div> */}
       </div>
       <div className={styles.numberAndSort}>
         <h2>{`${displayedPokemons.length} Pokemons`}</h2>

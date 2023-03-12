@@ -20,8 +20,10 @@ export default function Favourites(props: IFavouritesProps) {
   const currentUser = useAppSelector((state) => state.auth.currentUser);
 
   useEffect(() => {
-    dispatch(getPokemonsByFavourites(currentUser?._id!))
-  }, [dispatch, currentUser?._id]);
+    if(currentUser) {
+      dispatch(getPokemonsByFavourites(currentUser?._id!));
+    }
+  }, [dispatch, currentUser]);
 
   const handleNavigateLogin = () => {
     navigate('/login');

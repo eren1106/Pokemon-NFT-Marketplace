@@ -41,37 +41,39 @@ const Login: React.FunctionComponent<ILoginProps> = (props) => {
 
     return (
         <div className={styles.wrapper}>
-            <img
-                className={styles.logo}
-                src="https://raw.githubusercontent.com/PatrickAlphaC/pokemon-nft/main/img/logo.png"
-                alt="pokemon logo"
-            />
-            <form onSubmit={handleSubmit} className={styles.container}>
-                <input
-                    className={styles.textfield}
-                    type="email"
-                    name="email"
-                    placeholder="Email"
-                    required
+            <div className={styles.main}>
+                <img
+                    className={styles.logo}
+                    src="https://raw.githubusercontent.com/PatrickAlphaC/pokemon-nft/main/img/logo.png"
+                    alt="pokemon logo"
                 />
-                <input
-                    className={styles.textfield}
-                    type="password"
-                    name="password"
-                    placeholder="Password"
-                    required
-                />
-                <p className={styles.error}>{error && "Authentication failed"}</p>
-                <button type="submit" className={styles.btn}>
-                    {loading ? <CircularProgress size={25} thickness={6} /> : "Login"}
-                </button>
-                <NavLink
-                    to="/register"
-                    className={styles.link}
-                >
-                    Don't have an account? Register here
-                </NavLink>
-            </form>
+                <form onSubmit={handleSubmit} className={styles.container}>
+                    <input
+                        className={styles.textfield}
+                        type="email"
+                        name="email"
+                        placeholder="Email"
+                        required
+                    />
+                    <input
+                        className={styles.textfield}
+                        type="password"
+                        name="password"
+                        placeholder="Password"
+                        required
+                    />
+                    <p className={styles.error}>{error && "Authentication failed"}</p>
+                    <button type="submit" className={styles.btn}>
+                        {loading ? <CircularProgress size={25} thickness={6} /> : "Login"}
+                    </button>
+                    <NavLink
+                        to="/register"
+                        className={styles.link}
+                    >
+                        Don't have an account? Register here
+                    </NavLink>
+                </form>
+            </div>
         </div>
     );
 };

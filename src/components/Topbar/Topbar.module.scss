@@ -3,10 +3,14 @@
     border-bottom: 1px solid var(--topbar-stroke);
     padding: 15px;
     position: fixed;
-    width: 100%;
     top: 0;
     background-color: var(--background-dark);
     z-index: 9;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    width: calc(100% - var(--sidebar-open-width));
 
     .left {
         display: flex;
@@ -24,9 +28,13 @@
         }
     }
 }
+.topbar.large {
+    width: calc(100% - var(--sidebar-close-width));
+}
 
 @media screen and (max-width: 768px) {
     .topbar {
         top: var(--topsidebar-height);
+        width: 100% !important;
     }
 }

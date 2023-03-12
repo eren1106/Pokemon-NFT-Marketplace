@@ -10,6 +10,9 @@ export interface ITopbarProps {
 export default function Topbar(props: ITopbarProps) {
   const selectedTitle = useAppSelector((state) => state.selectedTitle.title);
   const backRoute = useAppSelector((state) => state.topbar.backRoute);
+  const currentUser = useAppSelector((state) => state.auth.currentUser);
+  const isClosed = useAppSelector((state) => state.sidebar.isClosed);
+
   const navigate = useNavigate();
 
   const handleBack = () => {
@@ -19,7 +22,7 @@ export default function Topbar(props: ITopbarProps) {
   }
 
   return (
-    <div className={styles.topbar}>
+    <div className={`${styles.topbar} ${isClosed && styles.large}`}>
       <div className={styles.left}>
         {backRoute &&
           <div
@@ -33,6 +36,7 @@ export default function Topbar(props: ITopbarProps) {
           {selectedTitle}
         </h1>
       </div>
+      {currentUser && <p>{`Money: $${currentUser.coins}`}</p>}
     </div>
   );
 }

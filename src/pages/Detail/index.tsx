@@ -102,7 +102,7 @@ const Detail: React.FC<IDetailProps> = ({ backRoute }) => {
         return;
       }
       if (currentUser.coins < pokemon?.price!) {
-        alert("Not enough coins");
+        alert("Not enough money!");
         return;
       }
       dispatch(buyPokemon({

@@ -1,72 +1,108 @@
 /* handle autocomplete color */
 input:-webkit-autofill,
-input:-webkit-autofill:hover, 
-input:-webkit-autofill:focus, 
-input:-webkit-autofill:active{
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
     -webkit-box-shadow: 0 0 0 100px var(--background-dark) inset !important;
 }
-input:-webkit-autofill{
+
+input:-webkit-autofill {
     -webkit-text-fill-color: white !important;
 }
 
 .wrapper {
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 50px;
-    gap: 30px;
+    min-height: 100vh;
 
-    .logo {
-        max-width: 450px;
-        max-height: min-content;
-    }
-
-    .container {
-        background-color: var(--grey-card);
-        padding: 30px 25px;
-        border-radius: 15px;
+    .main {
         display: flex;
         flex-direction: column;
-        align-items: center;
-        gap: 18px;
+        gap: 30px;
         width: 450px;
 
-        .textfield {
-            background-color: var(--background-dark);
-            color: white;
-            font-size: 18px;
-            padding: 20px 15px;
-            outline: none;
-            border: 2px solid var(--button-grey-outline);
-            border-radius: 10px;
+        .logo {
+            width: 100%;
+            max-height: min-content;
+        }
+
+        .container {
+            background-color: var(--grey-card);
+            padding: 30px 25px;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 18px;
             width: 100%;
 
-            &::placeholder {
-                color: var(--grey-text);
+            .textfield {
+                background-color: var(--background-dark);
+                color: white;
+                font-size: 18px;
+                padding: 20px 15px;
+                outline: none;
+                border: 2px solid var(--button-grey-outline);
+                border-radius: 10px;
+                width: 100%;
+
+                &::placeholder {
+                    color: var(--grey-text);
+                }
+            }
+
+            .error {
+                color: var(--red);
+            }
+
+            .btn {
+                background-color: var(--orange);
+                font-size: 20px;
+                font-weight: bold;
+                padding: 15px 10px;
+                border-radius: 10px;
+                cursor: pointer;
+                width: 100%;
+                transition: all 0.3s ease-in-out;
+
+                &:hover {
+                    background-color: var(--hover-orange);
+                }
+            }
+
+            // .link {
+            //     text-decoration: none;
+
+            //     &:hover {
+            //         text-decoration: underline;
+            //     }
+            // }
+        }
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .wrapper {
+        .main {
+            width: 300px;
+
+            .container {
+                padding: 15px;
             }
         }
+    }
+}
 
-        .error {
-            color: var(--red);
-        }
+@media screen and (max-width: 450px) {
+    .wrapper {
+        padding: 20px;
+    }
+}
 
-        .btn {
-            background-color: var(--orange);
-            font-size: 20px;
-            font-weight: bold;
-            padding: 15px 10px;
-            border-radius: 10px;
-            cursor: pointer;
-            width: 100%;
-        }
-
-        .link {
-            text-decoration: none;
-
-            &:hover {
-                text-decoration: underline;
-            }
-        }
+@media screen and (max-width: 350px) {
+    .wrapper {
+        padding: 20px;
     }
 }
