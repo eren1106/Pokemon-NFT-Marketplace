@@ -1,0 +1,100 @@
+.wrapper {
+  padding: 30px 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+
+  .intro {
+    display: flex;
+    align-items: center;
+    gap: 80px;
+
+    .introLeft {
+      display: flex;
+      flex-direction: column;
+      flex: 4.5;
+      gap: 20px;
+
+      .title {
+        font-size: 40px;
+      }
+
+      .description {}
+
+      .exploreBtn {
+        background-color: var(--orange);
+        border-radius: 10px;
+        font-size: 18px;
+        font-weight: bold;
+        width: fit-content;
+        padding: 12px 15px;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+
+        &:hover {
+          background-color: var(--hover-orange);
+        }
+      }
+    }
+
+    .introRight {
+      flex: 5.5;
+
+      .introImg {
+        width: 100%;
+      }
+    }
+  }
+
+  .recommend {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+
+    h1 {
+      font-size: 30px;
+    }
+
+    .cardsWrapper {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+  }
+}
+
+@media screen and (max-width: 1100px) {
+  .wrapper {
+
+    .intro {
+      gap: 30px;
+    }
+  }
+}
+
+@media screen and (max-width: 950px) {
+  .wrapper {
+
+    .intro {
+      flex-direction: column;
+
+      .introLeft {
+        align-items: center;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .wrapper {
+
+    .intro {
+
+      .introLeft {
+        text-align: center;
+      }
+    }
+  }
+}

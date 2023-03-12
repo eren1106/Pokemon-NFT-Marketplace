@@ -1,9 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios';
 import { Pokemon } from '../constant/pokemonInterface';
-import { User } from '../constant/userInterface'
-import { useAppDispatch, useAppSelector } from '../hooks';
-import { refreshUser } from './authSlice';
 
 // Define a type for the slice state
 interface PokemonState {
@@ -51,6 +48,11 @@ export const getPokemonsByUserId = createAsyncThunk('pokemon/getPokemonsByUserId
 
 export const getPokemonsByFavourites = createAsyncThunk('pokemon/getPokemonsByFavourites', async (userId: string) => {
   const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/pokemons/user/${userId}/favourites`);
+  return res.data;
+});
+
+export const getPokemonsByRandom = createAsyncThunk('pokemon/getPokemonsByRandom', async () => {
+  const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/pokemons/random`);
   return res.data;
 });
 
@@ -112,7 +114,7 @@ export const currentUserSlice = createSlice({
         state.error = action.error.message;
       })
 
-      // GET POKEMON BY USER ID
+      // GET POKEMONS BY USER ID
       .addCase(getPokemonsByUserId.pending, (state, action) => {
         state.loading = true;
         state.error = null;
@@ -121,11 +123,6 @@ export const currentUserSlice = createSlice({
       .addCase(getPokemonsByUserId.fulfilled, (state, action) => {
         state.loading = false;
         const pokemons = action.payload;
-        // pokemons.sort((a: Pokemon, b: Pokemon) => {
-        //   if(a.forSale === b.forSale) return a.no - b.no;
-        //   if(a.forSale) return -1;
-        //   return 1;
-        // })
         pokemons.sort((a: Pokemon, b: Pokemon) => a.no - b.no);
         state.pokemons = pokemons;
       })
@@ -134,7 +131,7 @@ export const currentUserSlice = createSlice({
         state.error = action.error.message;
       })
 
-      // GET POKEMON BY FAVOURITES
+      // GET POKEMONS BY FAVOURITES
       .addCase(getPokemonsByFavourites.pending, (state, action) => {
         state.loading = true;
         state.error = null;
@@ -143,15 +140,27 @@ export const currentUserSlice = createSlice({
       .addCase(getPokemonsByFavourites.fulfilled, (state, action) => {
         state.loading = false;
         const pokemons = action.payload;
-        // pokemons.sort((a: Pokemon, b: Pokemon) => {
-        //   if(a.forSale === b.forSale) return a.no - b.no;
-        //   if(a.forSale) return -1;
-        //   return 1;
-        // })
         pokemons.sort((a: Pokemon, b: Pokemon) => a.no - b.no);
         state.pokemons = pokemons;
       })
       .addCase(getPokemonsByFavourites.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      })
+
+      // GET POKEMONS BY RANDOM
+      .addCase(getPokemonsByRandom.pending, (state, action) => {
+        state.loading = true;
+        state.error = null;
+        state.currentPokemon = null;
+      })
+      .addCase(getPokemonsByRandom.fulfilled, (state, action) => {
+        state.loading = false;
+        // const pokemons = action.payload;
+        // pokemons.sort((a: Pokemon, b: Pokemon) => a.no - b.no);
+        state.pokemons = action.payload;
+      })
+      .addCase(getPokemonsByRandom.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       })

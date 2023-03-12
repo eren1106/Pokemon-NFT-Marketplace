@@ -1,7 +1,7 @@
 import { CircularProgress } from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
-import { NavLink, useParams } from 'react-router-dom';
+import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import ConditionalContent from '../../components/ConditionalContent';
 import PageWrapper from '../../components/PageWrapper';
 import TYPES from '../../constant/types';
@@ -28,6 +28,7 @@ const Detail: React.FC<IDetailProps> = ({ backRoute }) => {
   const tradeLoading = useAppSelector((state) => state.pokemon.tradeLoading);
   const tradeError = useAppSelector((state) => state.pokemon.tradeError);
   const priceRef = useRef<HTMLInputElement | null>(null);
+  const navigate = useNavigate();
 
   const [ownerName, setOwnerName] = useState<string>("-");
 
@@ -225,12 +226,16 @@ const Detail: React.FC<IDetailProps> = ({ backRoute }) => {
           <Info
             label="Owner"
             element={
-              <NavLink
-                to={`/user/${pokemon?.ownerID}`}
-                style={{ fontWeight: 'bold' }}
+              <p
+                onClick={() => {
+                  if(pokemon?.ownerID){
+                    navigate(`/user/${pokemon?.ownerID}`);
+                  }
+                }}
+                className={`${pokemon?.ownerID && styles.link}`}
               >
                 {`${ownerName}`}
-              </NavLink>
+              </p>
             }
           />
           <Info

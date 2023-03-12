@@ -10,14 +10,16 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 
 interface IPokemonCardProps {
   pokemon: Pokemon,
+  root?: string,
 }
 
 const PokemonCard: React.FC<IPokemonCardProps> = ({
   pokemon,
+  root,
 }) => {
   const navigate = useNavigate();
   const handleNavigate = () => {
-    navigate(pokemon._id!);
+    navigate(root ? `${root}/${pokemon._id!}` : pokemon._id!);
   }
   const [ownerName, setOwnerName] = useState("No owner");
   const currentUser = useAppSelector((state) => state.auth.currentUser);

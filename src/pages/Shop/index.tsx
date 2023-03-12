@@ -24,13 +24,14 @@ export default function Shop(props: IShopProps) {
 
   const [displayedPokemons, setDisplayedPokemons] = useState<Array<Pokemon>>([]);
   useEffect(() => {
-    const fetchData = async () => {
-      const res = await dispatch(getAllPokemons()).unwrap();
-      if (res.data) {
-        setDisplayedPokemons(res.data);
-      }
-    }
-    fetchData();
+    dispatch(getAllPokemons())
+    // const fetchData = async () => {
+    //   const res = await dispatch(getAllPokemons()).unwrap();
+    //   if (res.data) {
+    //     setDisplayedPokemons(res.data);
+    //   }
+    // }
+    // fetchData();
   }, [dispatch]);
 
   const [searchText, setSearchText] = useState("");
@@ -88,6 +89,7 @@ export default function Shop(props: IShopProps) {
     setAnchorEl(null);
   }
 
+  // CONTENT
   let content;
   if (loading) content = <CircularProgress sx={{
     position: 'absolute',

@@ -8,13 +8,14 @@ import Profile from './pages/Profile';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Favourites from './pages/Favourites';
+import Admin from './pages/Admin';
 
 function App() {
   return (
     <div>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/home" element={<Home />} />
+        <Route path="/recommend/:id" element={<Detail backRoute="/" />} />
         <Route path="/shop" element={<Shop />} />
         <Route path="/shop/:id" element={<Detail backRoute="/shop" />} />
         <Route path="/user/:id" element={<Profile />} />
@@ -25,6 +26,7 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/admin" element={<Admin />} />
       </Routes>
     </div>
   );

@@ -71,6 +71,11 @@ input::-webkit-inner-spin-button {
                     font-weight: bold;
                 }
 
+                .link {
+                    text-decoration: underline;
+                    cursor: pointer;
+                }
+
                 .types {
                     display: flex;
                     flex-wrap: wrap;
