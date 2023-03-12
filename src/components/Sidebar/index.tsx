@@ -14,6 +14,7 @@ import { logoutUser } from '../../features/authSlice';
 import ConditionalContent from '../ConditionalContent';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
+import { setClose } from '../../features/sidebarSlice';
 
 export interface ISidebarProps {
   onToggle: () => void;
@@ -60,12 +61,11 @@ const menuItems: MenuItem[] = [
 ];
 
 const Sidebar: React.FC<ISidebarProps> = ({ onToggle, isClosed }) => {
-
-  // const selectedTabName = useAppSelector((state) => state.selectedTitle.title);
   const [selectedTabName, setSelectedTabName] = useState("");
   const currentUser = useAppSelector((state) => state.auth.currentUser);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const screenWidth = window.innerWidth;
 
   const location = useLocation();
   const { pathname } = location;
@@ -139,7 +139,10 @@ const Sidebar: React.FC<ISidebarProps> = ({ onToggle, isClosed }) => {
                 key={item.name}
                 to={item.path}
                 onClick={() => {
-                  dispatch(setTitle(item.name))
+                  // dispatch(setTitle(item.name))
+                  if(screenWidth < 768){
+                    dispatch(setClose(true));
+                  }
                 }}
               >
                 {item.icon}
