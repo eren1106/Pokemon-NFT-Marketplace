@@ -9,7 +9,6 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import styles from './Shop.module.scss';
 import ImportExportIcon from '@mui/icons-material/ImportExport';
 import { sortStandards } from '../../constant/sortStandards';
-import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import ConditionalContent from '../../components/ConditionalContent';
 
 export interface IShopProps {
@@ -20,7 +19,6 @@ export default function Shop(props: IShopProps) {
   const pokemons = useAppSelector((state) => state.pokemon.pokemons);
   const loading = useAppSelector((state) => state.pokemon.loading);
   const error = useAppSelector((state) => state.pokemon.error);
-  const currentUser = useAppSelector((state) => state.auth.currentUser);
 
   const [displayedPokemons, setDisplayedPokemons] = useState<Array<Pokemon>>([]);
   useEffect(() => {
@@ -38,7 +36,7 @@ export default function Shop(props: IShopProps) {
   const [filterTypes, setFilterTypes] = useState<Array<string>>([]);
 
   // SORT
-  const [sortStandard, setSortStandard] = useState(sortStandards.lowestPrice);
+  const [sortStandard, setSortStandard] = useState(sortStandards.lowestIndex);
 
   useEffect(() => {
     if (pokemons) {
@@ -51,6 +49,22 @@ export default function Shop(props: IShopProps) {
 
       // SORT
       switch (sortStandard) {
+        case sortStandards.lowestIndex:
+          finalList = finalList.sort((a: Pokemon, b: Pokemon) => {
+            if (a.forSale && b.forSale) return a.no - b.no;
+            if (a.forSale) return -1;
+            if (b.forSale) return 1;
+            return a.price - b.price;
+          });
+          break;
+        case sortStandards.highestIndex:
+          finalList = finalList.sort((a: Pokemon, b: Pokemon) => {
+            if (a.forSale && b.forSale) return b.no - a.no;
+            if (a.forSale) return -1;
+            if (b.forSale) return 1;
+            return a.price - b.price;
+          });
+          break;
         case sortStandards.lowestPrice:
           finalList = finalList.sort((a: Pokemon, b: Pokemon) => {
             if (a.forSale && b.forSale) return a.price - b.price;

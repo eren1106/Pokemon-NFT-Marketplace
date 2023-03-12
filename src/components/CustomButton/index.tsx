@@ -18,7 +18,7 @@ interface ICustomButtonProps {
 
 // when condition is true, first element will show up, second will not visible and etc.
 // can also be use to show and hide an element according to the condition, the second element will not be used
-const CustomButton: React.FunctionComponent<ICustomButtonProps> = ({
+const CustomButton: React.FC<ICustomButtonProps> = ({
   text,
   onClick,
   loading,

@@ -51,7 +51,7 @@
             padding: 10px;
             border-radius: 5px;
             gap: 10px;
-            transition: all 0.3s ease-in-out;
+            // transition: all 0.3s ease-in-out;
 
             &:hover {
                 background-color: var(--grey-card);
@@ -61,7 +61,7 @@
                 .navText {
                     color: var(--orange);
                     fill: var(--orange);
-                    transition: all 0.3s ease-in-out;
+                    // transition: all 0.3s ease-in-out;
                 }
             }
 

@@ -10,7 +10,7 @@ import toast, { Toaster } from 'react-hot-toast';
 interface IRegisterProps {
 }
 
-const Register: React.FunctionComponent<IRegisterProps> = (props) => {
+const Register: React.FC<IRegisterProps> = (props) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const error = useAppSelector((state) => state.auth.error);

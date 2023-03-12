@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './Sidebar.module.scss';
 import HomeIcon from '@mui/icons-material/Home';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import CollectionsBookmarkIcon from '@mui/icons-material/CollectionsBookmark';
 import PersonIcon from '@mui/icons-material/Person';
 import MenuIcon from '@mui/icons-material/Menu';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { setTitle } from '../../features/selectedTitleSlice';
 import LoginIcon from '@mui/icons-material/Login';
@@ -13,6 +13,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import { logoutUser } from '../../features/authSlice';
 import ConditionalContent from '../ConditionalContent';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 
 export interface ISidebarProps {
   onToggle: () => void;
@@ -51,14 +52,51 @@ const menuItems: MenuItem[] = [
     name: "Profile",
     icon: <PersonIcon className={styles.icon} />
   },
+  {
+    path: "/admin",
+    name: "Admin",
+    icon: <AdminPanelSettingsIcon className={styles.icon} />
+  },
 ];
 
 const Sidebar: React.FC<ISidebarProps> = ({ onToggle, isClosed }) => {
 
-  const selectedTabName = useAppSelector((state) => state.selectedTitle.title);
+  // const selectedTabName = useAppSelector((state) => state.selectedTitle.title);
+  const [selectedTabName, setSelectedTabName] = useState("");
   const currentUser = useAppSelector((state) => state.auth.currentUser);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
+  const location = useLocation();
+  const { pathname } = location;
+
+  useEffect(() => {
+    if (pathname) {
+      const getCurrentTab = () => {
+        switch (true) {
+          case pathname === "/" || pathname.startsWith("/recommend"):
+            return "Home";
+          case pathname.startsWith("/shop"):
+            return "Shop";
+          case pathname.startsWith("/user"):
+            return "Shop";
+          case pathname.startsWith("/collection"):
+            return "Collection";
+          case pathname.startsWith("/favourites"):
+            return "Favourites";
+          case pathname.startsWith("/profile"):
+            return "Profile";
+          case pathname.startsWith("/admin"):
+            return "Admin";
+          default:
+            return "404 Not Found";
+        }
+      }
+
+      const path = getCurrentTab();
+      setSelectedTabName(path);
+    }
+  }, [pathname]);
 
   const handleLog = () => {
     if (currentUser) { // if current user exist then logout
@@ -91,19 +129,24 @@ const Sidebar: React.FC<ISidebarProps> = ({ onToggle, isClosed }) => {
       </div>
       <div className={styles.navItems}>
         {
-          menuItems.map((item) =>
-            <NavLink
-              className={`${styles.navItem} ${selectedTabName === item.name && styles.selectedItem}`}
-              key={item.name}
-              to={item.path}
-              onClick={() => {
-                dispatch(setTitle(item.name))
-              }}
-            >
-              {item.icon}
-              <p className={`${styles.navText} ${isClosed && styles.isClosed}`}>{item.name}</p>
-            </NavLink>
-          )
+          menuItems.map((item) => {
+            if(item.name === "Admin" && (!currentUser || currentUser.email !== process.env.REACT_APP_ADMIN_EMAIL)){
+              return "";
+            }
+            return (
+              <NavLink
+                className={`${styles.navItem} ${selectedTabName === item.name && styles.selectedItem}`}
+                key={item.name}
+                to={item.path}
+                onClick={() => {
+                  dispatch(setTitle(item.name))
+                }}
+              >
+                {item.icon}
+                <p className={`${styles.navText} ${isClosed && styles.isClosed}`}>{item.name}</p>
+              </NavLink>
+            )
+          })
         }
       </div>
       <button

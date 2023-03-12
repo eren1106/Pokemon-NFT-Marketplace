@@ -1,7 +1,7 @@
 import { CircularProgress } from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
-import { NavLink, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import ConditionalContent from '../../components/ConditionalContent';
 import PageWrapper from '../../components/PageWrapper';
 import TYPES from '../../constant/types';
@@ -215,6 +215,16 @@ const Detail: React.FC<IDetailProps> = ({ backRoute }) => {
         </Row>
         <Row>
           <Info
+            label="Special Attack"
+            text={pokemon?.spAtk}
+          />
+          <Info
+            label="Special Defense"
+            text={pokemon?.spDef}
+          />
+        </Row>
+        <Row>
+          <Info
             label="HP"
             text={pokemon?.hp}
           />
@@ -231,7 +241,12 @@ const Detail: React.FC<IDetailProps> = ({ backRoute }) => {
               <p
                 onClick={() => {
                   if (pokemon?.ownerID) {
-                    navigate(`/user/${pokemon?.ownerID}`);
+                    if(currentUser && currentUser._id === pokemon.ownerID) {
+                      navigate(`/profile`);
+                    }
+                    else {
+                      navigate(`/user/${pokemon?.ownerID}`);
+                    }
                   }
                 }}
                 className={`${pokemon?.ownerID && styles.link}`}
@@ -326,7 +341,7 @@ const Detail: React.FC<IDetailProps> = ({ backRoute }) => {
 
   return (
     <PageWrapper
-      title={`${pokemon ? pokemon.name : ""} ${pokemon ? convertPokedexNum(pokemon.no) : ""}`}
+      title={pokemon ? `${pokemon.name}'s Info` : ""}
     >
       <div className={styles.wrapper}>
         {content}

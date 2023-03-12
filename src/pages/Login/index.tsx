@@ -8,7 +8,7 @@ import styles from '../Register/Register.module.scss';
 interface ILoginProps {
 }
 
-const Login: React.FunctionComponent<ILoginProps> = (props) => {
+const Login: React.FC<ILoginProps> = (props) => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const error = useAppSelector((state) => state.auth.error);

@@ -81,6 +81,14 @@ export default function Profile(props: IProfileProps) {
     }
   }
 
+  const handleNavigatePokemon = (id: string) => {
+    if(currentUser?._id === profileUser?._id) {
+      navigate(`/collection/${id}`);
+    }
+    else{
+      navigate(`/shop/${id}`);
+    }
+  }
   useEffect(() => {
     if (id) dispatch(getProfileUser(id));
     else if (currentUser) dispatch(getProfileUser(currentUser?._id));
@@ -177,6 +185,9 @@ export default function Profile(props: IProfileProps) {
               src={pokemon.imgUrl}
               alt="pokemon img"
               key={pokemon._id}
+              onClick={() => {
+                handleNavigatePokemon(pokemon._id!);
+              }}
             />
           )
         }

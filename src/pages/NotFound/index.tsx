@@ -3,7 +3,7 @@ import React from 'react';
 interface INotFoundProps {
 }
 
-const NotFound: React.FunctionComponent<INotFoundProps> = () => {
+const NotFound: React.FC<INotFoundProps> = () => {
   return (
     <div style={{
       display: 'flex',

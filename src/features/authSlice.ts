@@ -71,7 +71,6 @@ export const toggleFavourite = createAsyncThunk('auth/toggleFavourite', async (p
   const storedUser = JSON.parse(localStorage.getItem('currentUser')!);
   const id = storedUser._id;
   const res = await axios.put(`${process.env.REACT_APP_SERVER_URL}/users/${id}/favourite`, { pokemonId });
-  console.log("FAVOURITE", res.data);
   return res.data;
 });
 

@@ -6,13 +6,14 @@ import styles from './PageWrapper.module.scss';
 import MenuIcon from '@mui/icons-material/Menu';
 import Topbar from '../Topbar';
 import { setClose } from '../../features/sidebarSlice';
+import Footer from '../Footer';
 
 interface IPageWrapperProps {
     children?: React.ReactNode;
     title: string;
 }
 
-const PageWrapper: React.FunctionComponent<IPageWrapperProps> = ({ children, title }) => {
+const PageWrapper: React.FC<IPageWrapperProps> = ({ children, title }) => {
     const dispatch = useAppDispatch();
     const isClosed = useAppSelector((state) => state.sidebar.isClosed);
 
@@ -46,6 +47,7 @@ const PageWrapper: React.FunctionComponent<IPageWrapperProps> = ({ children, tit
                 <div className={styles.content}>
                     {children}
                 </div>
+                <Footer />
             </div>
         </div>
     );

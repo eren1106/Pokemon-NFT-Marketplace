@@ -1,0 +1,12 @@
+.wrapper {
+  position: absolute;
+  bottom: 0;
+  border-top: 1px solid var(--topbar-stroke);
+  height: var(--footer-height);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--grey-text);
+  font-size: 14px;
+}

@@ -9,6 +9,8 @@ export interface Pokemon {
     def: number,
     hp: number,
     speed: number,
+    spAtk: number,
+    spDef: number,
     imgUrl: string,
     price: number,
     prevPrice?: number,
