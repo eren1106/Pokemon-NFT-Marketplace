@@ -1,6 +1,6 @@
 import { CircularProgress } from '@mui/material';
 import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import PageWrapper from '../../components/PageWrapper';
 import { getProfileUser } from '../../features/profileSlice';
 import { useAppDispatch, useAppSelector } from '../../hooks';
@@ -10,6 +10,7 @@ import ConditionalContent from '../../components/ConditionalContent';
 import { Pokemon } from '../../constant/pokemonInterface';
 import { updateUser } from '../../features/authSlice';
 import toast, { Toaster } from 'react-hot-toast';
+import CustomButton from '../../components/CustomButton';
 
 export interface IProfileProps {
 }
@@ -17,6 +18,7 @@ export interface IProfileProps {
 export default function Profile(props: IProfileProps) {
   const { id } = useParams();
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const currentUser = useAppSelector((state) => state.auth.currentUser);
   const currentUserLoading = useAppSelector((state) => state.auth.loading);
   const profileUser = useAppSelector((state) => state.profile.profileUser);
@@ -28,6 +30,10 @@ export default function Profile(props: IProfileProps) {
 
   const handleOpenEdit = () => {
     setEdit(true);
+  }
+
+  const handleNavigateLogin = () => {
+    navigate('/login');
   }
 
   const [formState, setFormState] = useState({
@@ -76,8 +82,8 @@ export default function Profile(props: IProfileProps) {
   }
 
   useEffect(() => {
-    const userId = id || currentUser?._id;
-    dispatch(getProfileUser(userId!));
+    if (id) dispatch(getProfileUser(id));
+    else if (currentUser) dispatch(getProfileUser(currentUser?._id));
   }, [dispatch, currentUser, id]);
 
   let content;
@@ -89,6 +95,7 @@ export default function Profile(props: IProfileProps) {
   }} />
   else if (error) content = <p>{error}</p>
   else content = <>
+    <h1>{profileUser?.name}</h1>
     <section className={styles.infoSection}>
       <img
         className={styles.profilePic}
@@ -159,17 +166,6 @@ export default function Profile(props: IProfileProps) {
           }
         />
       </form>
-      <ConditionalContent
-        condition={!edit && ((!!currentUser && !id) || (!!currentUser && currentUser._id === id))}
-        first={
-          <div
-            className={styles.editBtn}
-            onClick={handleOpenEdit}
-          >
-            <BorderColorIcon />
-          </div>
-        }
-      />
     </section>
     <section className={styles.pokemonSection}>
       <h1>Owned Pokemon(s): {pokemons.length}</h1>
@@ -180,19 +176,38 @@ export default function Profile(props: IProfileProps) {
               className={styles.pokemonImg}
               src={pokemon.imgUrl}
               alt="pokemon img"
+              key={pokemon._id}
             />
           )
         }
       </div>
     </section>
+    <ConditionalContent
+      condition={!edit && ((!!currentUser && !id) || (!!currentUser && currentUser._id === id))}
+      first={
+        <div
+          className={styles.editBtn}
+          onClick={handleOpenEdit}
+        >
+          <BorderColorIcon />
+        </div>
+      }
+    />
     <Toaster />
   </>
   return (
     <PageWrapper title="Profile">
       <div className={styles.wrapper}>
-        <div className={styles.panel}>
+        {currentUser ? <div className={styles.panel}>
           {content}
+        </div> : <div className={`${styles.center} ${styles.pleaseLogin}`}>
+          <p>Please Log In</p>
+          <CustomButton
+            text="Login"
+            onClick={handleNavigateLogin}
+          />
         </div>
+        }
       </div>
     </PageWrapper>
   );

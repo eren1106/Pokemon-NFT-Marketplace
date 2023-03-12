@@ -11,7 +11,7 @@ interface IConditionalContentProps {
 const ConditionalContent: React.FunctionComponent<IConditionalContentProps> = ({
   condition,
   first,
-  second = null,
+  second = "",
 }) => {
   return (
     <>

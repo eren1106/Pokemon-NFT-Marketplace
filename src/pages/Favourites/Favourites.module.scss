@@ -8,10 +8,17 @@
       justify-content: center;
   }
 
-  .errorText {
+  .center {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+  }
+
+  .pleaseLogin {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
   }
 }

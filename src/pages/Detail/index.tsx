@@ -117,7 +117,7 @@ const Detail: React.FC<IDetailProps> = ({ backRoute }) => {
   }
 
   const handleToggleFavourite = () => {
-    const isFavourite = currentUser.favourites.includes(pokemon?._id);
+    const isFavourite = currentUser ? currentUser.favourites.includes(pokemon?._id) : null;
     const promise = dispatch(toggleFavourite(pokemon?._id!));
     toast.promise(promise, {
       loading: 'Loading',
@@ -148,16 +148,18 @@ const Detail: React.FC<IDetailProps> = ({ backRoute }) => {
       <div className={styles.left}>
         <div className={styles.leftTop}>
           <h1>{pokemon?.name}</h1>
-          <div
-            className={styles.favourite}
-            onClick={handleToggleFavourite}
-          >
-            <ConditionalContent
-              condition={currentUser.favourites.includes(pokemon?._id)}
-              first={<FavoriteIcon className={styles.icon} />}
-              second={<FavoriteBorderIcon className={styles.icon} />}
-            />
-          </div>
+          {currentUser &&
+            <div
+              className={styles.favourite}
+              onClick={handleToggleFavourite}
+            >
+              <ConditionalContent
+                condition={currentUser.favourites.includes(pokemon?._id)}
+                first={<FavoriteIcon className={styles.icon} />}
+                second={<FavoriteBorderIcon className={styles.icon} />}
+              />
+            </div>
+          }
         </div>
         <img className={styles.pokemonImg} src={pokemon?.imgUrl} alt="pokemon" />
       </div>
@@ -228,7 +230,7 @@ const Detail: React.FC<IDetailProps> = ({ backRoute }) => {
             element={
               <p
                 onClick={() => {
-                  if(pokemon?.ownerID){
+                  if (pokemon?.ownerID) {
                     navigate(`/user/${pokemon?.ownerID}`);
                   }
                 }}

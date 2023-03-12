@@ -1,6 +1,7 @@
 import { CircularProgress } from '@mui/material';
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import CustomButton from '../../components/CustomButton';
 import PageWrapper from '../../components/PageWrapper';
 import PokemonCard from '../../components/PokemonCard';
 import { getPokemonsByRandom } from '../../features/pokemonSlice';
@@ -48,12 +49,10 @@ const Home: React.FC<IHomeProps> = (props: IHomeProps) => {
           <div className={styles.introLeft}>
             <h1 className={styles.title}>Collect your favourite pokemon now!</h1>
             <p className={styles.description}>Welcome to the largest pokemon marketplace that allows users to buy and sell Pokemon with in-game currency.</p>
-            <button
-              className={styles.exploreBtn}
+            <CustomButton
+              text="Explore"
               onClick={handleNavigateShop}
-            >
-              Explore
-            </button>
+            />
           </div>
           <div className={styles.introRight}>
             <img

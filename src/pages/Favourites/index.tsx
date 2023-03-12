@@ -1,5 +1,7 @@
 import { CircularProgress } from '@mui/material';
 import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import CustomButton from '../../components/CustomButton';
 import PageWrapper from '../../components/PageWrapper';
 import PokemonCard from '../../components/PokemonCard';
 import { getPokemonsByFavourites, getPokemonsByUserId } from '../../features/pokemonSlice';
@@ -11,6 +13,7 @@ export interface IFavouritesProps {
 
 export default function Favourites(props: IFavouritesProps) {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const pokemons = useAppSelector((state) => state.pokemon.pokemons);
   const loading = useAppSelector((state) => state.pokemon.loading);
   const error = useAppSelector((state) => state.pokemon.error);
@@ -20,15 +23,28 @@ export default function Favourites(props: IFavouritesProps) {
     dispatch(getPokemonsByFavourites(currentUser?._id!))
   }, [dispatch, currentUser?._id]);
 
+  const handleNavigateLogin = () => {
+    navigate('/login');
+  }
+
   let content;
-  if (loading) content = <CircularProgress sx={{
+  if(!currentUser) {
+    content = <div className={`${styles.center} ${styles.pleaseLogin}`}>
+      <p>Please Log In</p>
+      <CustomButton
+        text="Login"
+        onClick={handleNavigateLogin}
+      />
+    </div>
+  }
+  else if (loading) content = <CircularProgress sx={{
     position: 'absolute',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
   }} />
-  else if (error) content = <p>{error}</p>
-  else if(pokemons.length === 0) content = <p className={styles.errorText}>You did not add any pokemon to favourites yet!</p>
+  else if (error) content = <p className={styles.center}>{error}</p>
+  else if(pokemons.length === 0) content = <p className={styles.center}>You did not add any pokemon to favourites yet!</p>
   else content =
     <div className={styles.cardsWrapper}>
       {
