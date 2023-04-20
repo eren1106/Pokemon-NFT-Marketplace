@@ -57,7 +57,7 @@ const Home: React.FC<IHomeProps> = (props: IHomeProps) => {
           <div className={styles.introRight}>
             <img
               className={styles.introImg}
-              src="https://pngimage.net/wp-content/uploads/2018/06/turma-pokemon-png.png"
+              src={`${process.env.PUBLIC_URL}/images/pokemonsPic.png`}
               alt="intro"
             />
           </div>

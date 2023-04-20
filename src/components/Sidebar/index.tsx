@@ -117,12 +117,12 @@ const Sidebar: React.FC<ISidebarProps> = ({ onToggle, isClosed }) => {
         {isClosed ?
           <img
             className={styles.smallLogo}
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Pok%C3%A9_Ball_icon.svg/800px-Pok%C3%A9_Ball_icon.svg.png"
+            src={`${process.env.PUBLIC_URL}/images/pokeballLogo.png`}
             alt="pokeball logo"
           /> :
           <img
             className={styles.bigLogo}
-            src="https://raw.githubusercontent.com/PatrickAlphaC/pokemon-nft/main/img/logo.png"
+            src={`${process.env.PUBLIC_URL}/images/pokemonLogo.png`}
             alt="pokemon logo"
           />
         }

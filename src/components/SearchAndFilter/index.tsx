@@ -82,7 +82,7 @@ const SearchAndFilter: React.FC<ISearchAndFilterProps> = ({ setSearchText, setFi
             </button>
           </div>
           <div className={styles.typesContainer}>
-            {Object.entries(TYPES).map(([key, value]) =>
+            {Object.entries(TYPES).map(([key, value]) => // value is Type
               <div
                 key={key}
                 className={styles.type}
@@ -94,7 +94,7 @@ const SearchAndFilter: React.FC<ISearchAndFilterProps> = ({ setSearchText, setFi
                 }}
               >
                 <img
-                  src={value.imageUrl}
+                  src={`${process.env.PUBLIC_URL}/images/${value.imageUrl}`}
                   alt="pokemon icon"
                   className={styles.icon}
                 />

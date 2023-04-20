@@ -177,7 +177,7 @@ const Detail: React.FC<IDetailProps> = ({ backRoute }) => {
                     >
                       <img
                         className={styles.typeImg}
-                        src={TYPES[type.toLowerCase()].imageUrl}
+                        src={`${process.env.PUBLIC_URL}/images/${TYPES[type.toLowerCase()].imageUrl}`}
                         alt="pokemon"
                       />
                       <p className={styles.typeText}>{type}</p>

@@ -29,92 +29,92 @@ export interface Type {
 export const TYPES: Types = {
     normal: {
         name: "Normal",
-        imageUrl: "https://archives.bulbagarden.net/media/upload/9/95/Normal_icon_SwSh.png",
+        imageUrl: "normal.png",
         color: "#A8A878",
     },
     fire: {
         name: "Fire",
-        imageUrl: "https://archives.bulbagarden.net/media/upload/a/ab/Fire_icon_SwSh.png",
+        imageUrl: "fire.png",
         color: "#F08030",
     },
     water: {
         name: "Water",
-        imageUrl: "https://archives.bulbagarden.net/media/upload/8/80/Water_icon_SwSh.png",
+        imageUrl: "water.png",
         color: "#6890F0",
     },
     electric: {
         name: "Electric",
-        imageUrl: "https://archives.bulbagarden.net/media/upload/7/7b/Electric_icon_SwSh.png",
+        imageUrl: "electric.png",
         color: "#F8D030",
     },
     grass: {
         name: "Grass",
-        imageUrl: "https://archives.bulbagarden.net/media/upload/a/a8/Grass_icon_SwSh.png",
+        imageUrl: "grass.png",
         color: "#78C850",
     },
     ice: {
         name: "Ice",
-        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Pok%C3%A9mon_Ice_Type_Icon.svg/180px-Pok%C3%A9mon_Ice_Type_Icon.svg.png",
+        imageUrl: "ice.png",
         color: "#98D8D8",
     },
     fighting: {
         name: "Fighting",
-        imageUrl: "https://archives.bulbagarden.net/media/upload/3/3b/Fighting_icon_SwSh.png",
+        imageUrl: "fighting.png",
         color: "#C03028",
     },
     poison: {
         name: "Poison",
-        imageUrl: "https://archives.bulbagarden.net/media/upload/8/8d/Poison_icon_SwSh.png",
+        imageUrl: "poison.png",
         color: "#A040A0",
     },
     ground: {
         name: "Ground",
-        imageUrl: "https://archives.bulbagarden.net/media/upload/2/27/Ground_icon_SwSh.png",
+        imageUrl: "ground.png",
         color: "#E0C068",
     },
     flying: {
         name: "Flying",
-        imageUrl: "https://archives.bulbagarden.net/media/upload/b/b5/Flying_icon_SwSh.png",
+        imageUrl: "flying.png",
         color: "#A890F0",
     },
     psychic: {
         name: "Psychic",
-        imageUrl: "https://archives.bulbagarden.net/media/upload/7/73/Psychic_icon_SwSh.png",
+        imageUrl: "psychic.png",
         color: "#F85888",
     },
     bug: {
         name: "Bug",
-        imageUrl: "https://archives.bulbagarden.net/media/upload/9/9c/Bug_icon_SwSh.png",
+        imageUrl: "bug.png",
         color: "#A8B820",
     },
     rock: {
         name: "Rock",
-        imageUrl: "https://archives.bulbagarden.net/media/upload/1/11/Rock_icon_SwSh.png",
+        imageUrl: "rock.png",
         color: "#B8A038",
     },
     ghost: {
         name: "Ghost",
-        imageUrl: "https://archives.bulbagarden.net/media/upload/0/01/Ghost_icon_SwSh.png",
+        imageUrl: "ghost.png",
         color: "#705898",
     },
     dragon: {
         name: "Dragon",
-        imageUrl: "https://archives.bulbagarden.net/media/upload/7/70/Dragon_icon_SwSh.png",
+        imageUrl: "dragon.png",
         color: "#7038F8",
     },
     dark: {
         name: "Dark",
-        imageUrl: "https://archives.bulbagarden.net/media/upload/d/d5/Dark_icon_SwSh.png",
+        imageUrl: "dark.png",
         color: "#705848",
     },
     steel: {
         name: "Steel",
-        imageUrl: "https://archives.bulbagarden.net/media/upload/0/09/Steel_icon_SwSh.png",
+        imageUrl: "steel.png",
         color: "#B8B8D0",
     },
     fairy: {
         name: "Fairy",
-        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Pok%C3%A9mon_Fairy_Type_Icon.svg/180px-Pok%C3%A9mon_Fairy_Type_Icon.svg.png",
+        imageUrl: "fairy.png",
         color: "#EE99AC",
     }
 };

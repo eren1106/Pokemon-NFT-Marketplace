@@ -52,7 +52,7 @@ const PokemonCard: React.FC<IPokemonCardProps> = ({
                 pokemon.types.map((type) =>
                   <img
                     key={type}
-                    src={TYPES[type.toLowerCase()].imageUrl}
+                    src={`${process.env.PUBLIC_URL}/images/${TYPES[type.toLowerCase()].imageUrl}`}
                     alt="type icon"
                     className={styles.typeIcon}
                   />
